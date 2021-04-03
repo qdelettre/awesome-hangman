@@ -5,11 +5,17 @@ import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { MockComponents, MockDirective, MockModule, ngMocks } from 'ng-mocks';
 
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { GameComponent } from './game.component';
+import * as fromGame from './core/stores/game/game.reducer';
 
 describe('GameComponent', () => {
   let component: GameComponent;
   let fixture: ComponentFixture<GameComponent>;
+  let store: MockStore;
+  const initialState = {
+    [fromGame.gameFeatureKey]: fromGame.initialState,
+  };
 
   const initTestBed = () => {
     TestBed.configureTestingModule({
@@ -19,10 +25,12 @@ describe('GameComponent', () => {
         MockDirective(RouterLink),
       ],
       imports: [MockModule(MatToolbarModule)],
+      providers: [provideMockStore({ initialState })],
     }).compileComponents();
 
     fixture = TestBed.createComponent(GameComponent);
     component = fixture.componentInstance;
+    store = TestBed.inject(MockStore);
     fixture.detectChanges();
   };
 
@@ -53,5 +61,15 @@ describe('GameComponent', () => {
       RouterLink
     );
     expect(mockDirective.routerLink).toEqual('..');
+  });
+
+  it('should show word length when word not empty', () => {
+    store.setState({
+      [fromGame.gameFeatureKey]: { ...fromGame.initialState, word: 'word' },
+    });
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('span').textContent).toEqual(
+      `length: 4`
+    );
   });
 });
