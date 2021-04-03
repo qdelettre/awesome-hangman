@@ -3,3 +3,7 @@
     <mat-icon>arrow_back</mat-icon>Return
   </button>
 </mat-toolbar>
+
+<ng-container *ngIf="word$ | async as word">
+  <span>length: {{ word.length }}</span>
+</ng-container>
