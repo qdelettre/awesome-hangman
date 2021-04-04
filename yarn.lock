@@ -5899,10 +5899,10 @@ next-tick@~1.0.0:
   resolved "https://registry.npmjs.org/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
 
-ng-mocks@11.9.1:
-  version "11.9.1"
-  resolved "https://registry.yarnpkg.com/ng-mocks/-/ng-mocks-11.9.1.tgz#a35568e1459923d0393ca717c8b71a126fe1029e"
-  integrity sha512-tXQOSZH2VeOIlYhhCV9gMvbqPA6uOjNTnyrGQqVvEm4mySJ2lqcI2MX+4CDF5KrtnEHT27pXdxeAqwOenDoonQ==
+ng-mocks@11.10.0:
+  version "11.10.0"
+  resolved "https://registry.yarnpkg.com/ng-mocks/-/ng-mocks-11.10.0.tgz#001ecb1a3611e7b7bdaf7fb5900bf086bf3de327"
+  integrity sha512-9lMgQbmBldBSv7NC5IbRlXxo7/AbPDP2SMrTVXl2DONiywCHB0W9CXX+GTKZuBohqIgdgWcEZI5yxIzvi4wMhQ==
 
 nice-try@^1.0.4:
   version "1.0.5"
