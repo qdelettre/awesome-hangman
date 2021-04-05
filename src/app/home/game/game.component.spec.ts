@@ -8,6 +8,7 @@ import { MockComponents, MockDirective, MockModule, ngMocks } from 'ng-mocks';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { GameComponent } from './game.component';
 import * as fromGame from './core/stores/game/game.reducer';
+import { CharComponent } from './core/components/char/char.component';
 
 describe('GameComponent', () => {
   let component: GameComponent;
@@ -21,7 +22,7 @@ describe('GameComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         GameComponent,
-        MockComponents(MatButton, MatIcon),
+        MockComponents(MatButton, MatIcon, CharComponent),
         MockDirective(RouterLink),
       ],
       imports: [MockModule(MatToolbarModule)],
@@ -67,9 +68,17 @@ describe('GameComponent', () => {
     store.setState({
       [fromGame.gameFeatureKey]: { ...fromGame.initialState, word: 'word' },
     });
+    store.refreshState();
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('span').textContent).toEqual(
-      `length: 4`
-    );
+    expect(
+      fixture.nativeElement.querySelector('container-chars')
+    ).not.toBeUndefined();
+
+    const chars = ngMocks.findInstances(CharComponent);
+    expect(chars.length).toEqual(4);
+    expect(chars[0].char).toEqual('w');
+    expect(chars[1].char).toEqual('o');
+    expect(chars[2].char).toEqual('r');
+    expect(chars[3].char).toEqual('d');
   });
 });
