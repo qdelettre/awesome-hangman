@@ -13,9 +13,10 @@ import { GameEffects } from './core/stores/game/game.effects';
 import * as fromGame from './core/stores/game/game.reducer';
 import * as fromWord from './core/stores/word/word.reducer';
 import { StoreModule } from '@ngrx/store';
+import { CharComponent } from './core/components/char/char.component';
 
 @NgModule({
-  declarations: [GameComponent],
+  declarations: [GameComponent, CharComponent],
   imports: [
     CommonModule,
     RouterModule,

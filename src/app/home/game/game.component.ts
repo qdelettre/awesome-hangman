@@ -9,7 +9,7 @@ import * as fromGame from './core/stores/game/game.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameComponent {
-  word$ = this.store.select(fromGame.getWord);
+  chars$ = this.store.select(fromGame.getWordChars);
 
   constructor(private store: Store) {}
 }

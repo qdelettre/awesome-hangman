@@ -4,6 +4,8 @@
   </button>
 </mat-toolbar>
 
-<ng-container *ngIf="word$ | async as word">
-  <span>length: {{ word.length }}</span>
+<ng-container *ngIf="chars$ | async as chars">
+  <div id="container-chars">
+    <app-char *ngFor="let char of chars" [char]="char"></app-char>
+  </div>
 </ng-container>

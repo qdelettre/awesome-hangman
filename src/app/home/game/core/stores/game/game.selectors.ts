@@ -6,3 +6,7 @@ export const selectGameState = createFeatureSelector<fromGame.State>(
 );
 
 export const getWord = createSelector(selectGameState, (state) => state.word);
+
+export const getWordChars = createSelector(getWord, (word) =>
+  !!word && word.length ? [...word] : []
+);
