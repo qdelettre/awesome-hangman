@@ -1,7 +1,7 @@
 export enum RequestState {
-  Initial = 'Initial',
-  Loading = 'Loading',
-  Error = 'Error',
-  Success = 'Success',
-  Cancelled = 'Cancelled',
+  initial = 'Initial',
+  loading = 'Loading',
+  error = 'Error',
+  success = 'Success',
+  cancelled = 'Cancelled',
 }

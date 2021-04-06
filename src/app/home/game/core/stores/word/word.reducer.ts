@@ -11,7 +11,7 @@ export interface State {
 
 export const initialState: State = {
   words: [],
-  requestState: RequestState.Initial,
+  requestState: RequestState.initial,
 };
 
 export const reducer = createReducer(
@@ -19,16 +19,16 @@ export const reducer = createReducer(
   on(WordActions.loadWords, (state) => ({
     ...state,
     words: [],
-    requestState: RequestState.Loading,
+    requestState: RequestState.loading,
   })),
   on(WordActions.loadWordsSuccess, (state, { words }) => ({
     ...state,
-    requestState: RequestState.Success,
+    requestState: RequestState.success,
     words,
   })),
   on(WordActions.loadWordsFailure, (state) => ({
     ...state,
-    requestState: RequestState.Error,
+    requestState: RequestState.error,
     words: [],
   }))
 );
