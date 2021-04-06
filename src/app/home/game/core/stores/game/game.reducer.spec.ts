@@ -10,4 +10,18 @@ describe('Game Reducer', () => {
       expect(result).toEqual({ ...initialState, word });
     });
   });
+
+  it('should set char tryCharSuccess', () => {
+    const char = 'w';
+    const action = GameActions.tryCharSuccess({ char });
+    const result = reducer(initialState, action);
+    expect(result).toEqual({ ...initialState, chars: [char] });
+  });
+
+  it('should set char tryCharFailure', () => {
+    const char = 'w';
+    const action = GameActions.tryCharFailure({ char });
+    const result = reducer(initialState, action);
+    expect(result).toEqual({ ...initialState, chars: [char] });
+  });
 });

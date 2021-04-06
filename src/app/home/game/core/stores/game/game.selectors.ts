@@ -5,8 +5,15 @@ export const selectGameState = createFeatureSelector<fromGame.State>(
   fromGame.gameFeatureKey
 );
 
-export const getWord = createSelector(selectGameState, (state) => state.word);
+export const getWord = createSelector(selectGameState, ({ word }) => word);
 
-export const getWordChars = createSelector(getWord, (word) =>
-  !!word && word.length ? [...word] : []
+export const getChars = createSelector(selectGameState, ({ chars }) => chars);
+
+const r = new RegExp('[^a-zA-Z]');
+export const getWordChars = createSelector(getWord, getChars, (word, chars) =>
+  !!word && word.length
+    ? [...word].map((char) =>
+        chars.includes(char.toLowerCase()) || r.test(char) ? char : ''
+      )
+    : []
 );

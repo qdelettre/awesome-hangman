@@ -5,5 +5,16 @@
   flex-wrap: nowrap;
   justify-content: space-evenly;
   align-items: center;
-  height: calc(100vh - 64px);
+  height: calc(50vh - 64px);
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#tried {
+  text-align: center;
+  margin: 2rem 2rem;
 }
