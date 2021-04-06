@@ -9,7 +9,7 @@ describe('Word Reducer', () => {
       const result = reducer(initialState, action);
       expect(result).toEqual({
         ...initialState,
-        requestState: RequestState.Loading,
+        requestState: RequestState.loading,
       });
     });
   });
@@ -20,7 +20,7 @@ describe('Word Reducer', () => {
       const result = reducer(initialState, action);
       expect(result).toEqual({
         ...initialState,
-        requestState: RequestState.Success,
+        requestState: RequestState.success,
         words,
       });
     });
@@ -32,7 +32,7 @@ describe('Word Reducer', () => {
       const result = reducer(initialState, action);
       expect(result).toEqual({
         ...initialState,
-        requestState: RequestState.Error,
+        requestState: RequestState.error,
       });
     });
   });
