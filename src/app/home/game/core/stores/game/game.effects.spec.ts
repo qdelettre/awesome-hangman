@@ -3,18 +3,18 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
-import * as fromWord from '../word/word.reducer';
 import * as GameActions from './game.actions';
 import * as WordActions from '../word/word.actions';
 
 import { GameEffects } from './game.effects';
-import { getWord } from '../word/word.selectors';
+import * as fromWord from '../word/word.selectors';
+import * as fromGame from './game.selectors';
 import { ROUTER_NAVIGATION } from '@ngrx/router-store';
 
 describe('GameEffects', () => {
   let actions$: Observable<any>;
   let effects: GameEffects;
-  let store: MockStore<fromWord.State>;
+  let store: MockStore;
   let mockWordSelector;
 
   beforeEach(() => {
@@ -55,7 +55,7 @@ describe('GameEffects', () => {
   });
 
   it('should not set word on start', () => {
-    mockWordSelector = store.overrideSelector(getWord, null);
+    mockWordSelector = store.overrideSelector(fromWord.getWord, null);
 
     actions$ = hot('-a-', {
       a: GameActions.start,
@@ -65,7 +65,7 @@ describe('GameEffects', () => {
   });
 
   it('should set word on start', () => {
-    mockWordSelector = store.overrideSelector(getWord, 'word');
+    mockWordSelector = store.overrideSelector(fromWord.getWord, 'word');
 
     actions$ = hot('-a-', {
       a: GameActions.start,
@@ -76,5 +76,37 @@ describe('GameEffects', () => {
       }),
     });
     expect(effects.start$).toBeObservable(expected);
+  });
+
+  describe('when word', () => {
+    beforeEach(() => {
+      mockWordSelector = store.overrideSelector(fromGame.getWord, 'word');
+    });
+
+    it('should emit tryCharSuccess on try char when char in word', () => {
+      const char = 'W';
+      actions$ = hot('-a-', {
+        a: GameActions.tryChar({ char }),
+      });
+      const expected = cold('-a-', {
+        a: GameActions.tryCharSuccess({
+          char,
+        }),
+      });
+      expect(effects.tryAchar$).toBeObservable(expected);
+    });
+
+    it('should emit tryCharFailure on try char when char not in word', () => {
+      const char = 'x';
+      actions$ = hot('-a-', {
+        a: GameActions.tryChar({ char }),
+      });
+      const expected = cold('-a-', {
+        a: GameActions.tryCharFailure({
+          char,
+        }),
+      });
+      expect(effects.tryAchar$).toBeObservable(expected);
+    });
   });
 });
