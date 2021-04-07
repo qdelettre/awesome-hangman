@@ -7,15 +7,18 @@ export const setWord = createAction(
 
 export const start = createAction('[Game] Start');
 
-export const tryChar = createAction(
-  '[Game] Try a char',
-  props<{ char: string }>()
+export const guess = createAction(
+  '[Game] Guess',
+  props<{ charOrWord: string }>()
 );
-export const tryCharSuccess = createAction(
-  '[Game] Try a char success',
-  props<{ char: string }>()
+export const guessSuccess = createAction(
+  '[Game] Guess success',
+  props<{ charOrWord: string }>()
 );
-export const tryCharFailure = createAction(
-  '[Game] Try a char failure',
-  props<{ char: string }>()
+export const guessFailure = createAction(
+  '[Game] Guess failure',
+  props<{ charOrWord: string }>()
 );
+
+export const win = createAction('[Game] Win');
+export const loose = createAction('[Game] Loose');

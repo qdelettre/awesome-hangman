@@ -16,17 +16,18 @@ export class GameComponent {
   input!: MatInput;
 
   wordChars$ = this.store.select(fromGame.getWordChars);
-  chars$ = this.store.select(fromGame.getChars);
+  chars$ = this.store.select(fromGame.getGuessChars);
 
   formGroup = this.fb.group({
-    char: [null, [Validators.required, Validators.maxLength(1)]],
+    guess: [null, Validators.required],
   });
+
   constructor(private store: Store, private fb: FormBuilder) {}
 
-  try(): void {
+  guess(): void {
     this.store.dispatch(
-      GameActions.tryChar({
-        char: this.formGroup.value.char.toLowerCase(),
+      GameActions.guess({
+        charOrWord: this.formGroup.value.guess.toLowerCase(),
       })
     );
     this.formGroup.reset();

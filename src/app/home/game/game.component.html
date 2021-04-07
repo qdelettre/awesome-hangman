@@ -5,39 +5,42 @@
 </mat-toolbar>
 
 <ng-container *ngIf="wordChars$ | async as wordChars">
-  <div id="container-chars">
+  <div id="container-word-chars">
     <app-char *ngFor="let char of wordChars" [char]="char"></app-char>
   </div>
 
-  <ng-container *ngIf="chars$ | async as chars">
-    <div id="tried" *ngIf="chars.length">
-      You tried :
-      <span *ngFor="let char of chars; let last = last">
-        {{ char }} {{ last ? "" : "," }}
-      </span>
-    </div>
-  </ng-container>
+  <div id="container-chars" *ngIf="chars$ | async as chars">
+    <mat-chip-list>
+      <mat-chip *ngFor="let char of chars">
+        {{ char }}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
 
-  <form [formGroup]="formGroup" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
-    <mat-form-field>
-      <input
-        matInput
-        type="text"
-        formControlName="char"
-        cdkFocusInitial
-        placeholder="Type a character"
-        aria-label="Try a character"
-        autocomplete="off"
-        #input
-      />
-    </mat-form-field>
-    <button
-      mat-button
-      aria-label="Try"
-      [disabled]="formGroup.invalid"
-      (click)="try(); input.focus()"
-    >
-      Try
-    </button>
-  </form>
+  <mat-card>
+    <form [formGroup]="formGroup" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="guess"
+          cdkFocusInitial
+          placeholder="Guess a character or a word"
+          aria-label="Guess a character or a word"
+          autocomplete="off"
+          #input
+        />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        aria-label="Guess"
+        matTooltip="Guess"
+        [disabled]="formGroup.invalid"
+        (click)="guess(); input.focus()"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+    </form>
+  </mat-card>
 </ng-container>

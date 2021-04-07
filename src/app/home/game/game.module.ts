@@ -5,6 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { GameRoutingModule } from './game-routing.module';
 import { GameComponent } from './game.component';
@@ -31,7 +34,10 @@ import { A11yModule } from '@angular/cdk/a11y';
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
+    MatCardModule,
     MatInputModule,
+    MatTooltipModule,
+    MatChipsModule,
     GameRoutingModule,
     StoreModule.forFeature(fromGame.gameFeatureKey, fromGame.reducer),
     StoreModule.forFeature(fromWord.wordFeatureKey, fromWord.reducer),

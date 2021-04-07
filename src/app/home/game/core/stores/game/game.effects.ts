@@ -41,20 +41,40 @@ export class GameEffects {
     )
   );
 
-  tryAchar$ = createEffect(() =>
+  guess$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(GameActions.tryChar),
-      map(({ char }) => char),
+      ofType(GameActions.guess),
+      map(({ charOrWord }) => charOrWord),
       withLatestFrom(
         this.store
           .select(fromGame.getWord)
           .pipe(filter((word): word is string => !!word))
       ),
-      concatMap(([char, word]) => [
-        word.toLowerCase().includes(char.toLowerCase())
-          ? GameActions.tryCharSuccess({ char })
-          : GameActions.tryCharFailure({ char }),
+      concatMap(([charOrWord, word]) => [
+        word.toLowerCase().includes(charOrWord.toLowerCase())
+          ? GameActions.guessSuccess({ charOrWord })
+          : GameActions.guessFailure({ charOrWord }),
       ])
+    )
+  );
+
+  loose$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GameActions.guessFailure),
+      withLatestFrom(
+        this.store.select(fromGame.getLoose).pipe(filter((loose) => !!loose))
+      ),
+      concatMap(() => [GameActions.loose()])
+    )
+  );
+
+  win$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GameActions.guessSuccess),
+      withLatestFrom(
+        this.store.select(fromGame.getWin).pipe(filter((win) => !!win))
+      ),
+      concatMap(() => [GameActions.win()])
     )
   );
 
