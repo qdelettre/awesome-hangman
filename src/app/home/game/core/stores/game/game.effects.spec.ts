@@ -15,7 +15,6 @@ describe('GameEffects', () => {
   let actions$: Observable<any>;
   let effects: GameEffects;
   let store: MockStore;
-  let mockWordSelector;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -55,7 +54,7 @@ describe('GameEffects', () => {
   });
 
   it('should not set word on start', () => {
-    mockWordSelector = store.overrideSelector(fromWord.getWord, null);
+    store.overrideSelector(fromWord.getWord, null);
 
     actions$ = hot('-a-', {
       a: GameActions.start,
@@ -65,7 +64,7 @@ describe('GameEffects', () => {
   });
 
   it('should set word on start', () => {
-    mockWordSelector = store.overrideSelector(fromWord.getWord, 'word');
+    store.overrideSelector(fromWord.getWord, 'word');
 
     actions$ = hot('-a-', {
       a: GameActions.start,
@@ -80,33 +79,59 @@ describe('GameEffects', () => {
 
   describe('when word', () => {
     beforeEach(() => {
-      mockWordSelector = store.overrideSelector(fromGame.getWord, 'word');
+      store.overrideSelector(fromGame.getWord, 'word');
     });
 
-    it('should emit tryCharSuccess on try char when char in word', () => {
-      const char = 'W';
+    it('should emit guessSuccess on guess when char in word', () => {
+      const charOrWord = 'W';
       actions$ = hot('-a-', {
-        a: GameActions.tryChar({ char }),
+        a: GameActions.guess({ charOrWord }),
       });
       const expected = cold('-a-', {
-        a: GameActions.tryCharSuccess({
-          char,
+        a: GameActions.guessSuccess({
+          charOrWord,
         }),
       });
-      expect(effects.tryAchar$).toBeObservable(expected);
+      expect(effects.guess$).toBeObservable(expected);
     });
 
-    it('should emit tryCharFailure on try char when char not in word', () => {
-      const char = 'x';
+    it('should emit guessFailure on guess when char not in word', () => {
+      const charOrWord = 'x';
       actions$ = hot('-a-', {
-        a: GameActions.tryChar({ char }),
+        a: GameActions.guess({ charOrWord }),
       });
       const expected = cold('-a-', {
-        a: GameActions.tryCharFailure({
-          char,
+        a: GameActions.guessFailure({
+          charOrWord,
         }),
       });
-      expect(effects.tryAchar$).toBeObservable(expected);
+      expect(effects.guess$).toBeObservable(expected);
+    });
+
+    it('should emit loose on guessFailure when loosing', () => {
+      store.overrideSelector(fromGame.getLoose, true);
+
+      const charOrWord = 'x';
+      actions$ = hot('-a-', {
+        a: GameActions.guessFailure({ charOrWord }),
+      });
+      const expected = cold('-a-', {
+        a: GameActions.loose(),
+      });
+      expect(effects.loose$).toBeObservable(expected);
+    });
+
+    it('should emit win on guessFailure when winning', () => {
+      store.overrideSelector(fromGame.getWin, true);
+
+      const charOrWord = 'W';
+      actions$ = hot('-a-', {
+        a: GameActions.guessSuccess({ charOrWord }),
+      });
+      const expected = cold('-a-', {
+        a: GameActions.win(),
+      });
+      expect(effects.win$).toBeObservable(expected);
     });
   });
 });

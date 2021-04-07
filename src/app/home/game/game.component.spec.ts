@@ -9,19 +9,18 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { GameComponent } from './game.component';
 import * as fromGame from './core/stores/game/game.reducer';
 import { CharComponent } from './core/components/char/char.component';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { MatFormField } from '@angular/material/form-field';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import * as GameActions from './core/stores/game/game.actions';
+import { MatChip, MatChipList } from '@angular/material/chips';
+import { MatCard } from '@angular/material/card';
 
 describe('GameComponent', () => {
   let component: GameComponent;
   let fixture: ComponentFixture<GameComponent>;
   let store: MockStore;
-  const initialState = {
-    [fromGame.gameFeatureKey]: fromGame.initialState,
-  };
   const word = 'word';
 
   const initTestBed = () => {
@@ -33,12 +32,21 @@ describe('GameComponent', () => {
           MatIcon,
           CharComponent,
           MatFormField,
-          MatInput
+          MatInput,
+          MatCard,
+          MatChipList,
+          MatChip
         ),
         MockDirectives(RouterLink, CdkTrapFocus),
       ],
       imports: [FormsModule, ReactiveFormsModule, MockModule(MatToolbarModule)],
-      providers: [provideMockStore({ initialState })],
+      providers: [
+        provideMockStore({
+          initialState: {
+            [fromGame.gameFeatureKey]: fromGame.initialState,
+          },
+        }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(GameComponent);
@@ -99,8 +107,8 @@ describe('GameComponent', () => {
       store.setState({
         [fromGame.gameFeatureKey]: {
           ...fromGame.initialState,
-          word: 'word',
-          chars: ['w', 'd'],
+          word,
+          guess: ['w', 'd'],
         },
       });
       store.refreshState();
@@ -126,7 +134,7 @@ describe('GameComponent', () => {
 
       const spyOnDispatch = spyOn(store, 'dispatch');
       const char = 'w';
-      const input = ngMocks.find(['formControlName', 'char']);
+      const input = ngMocks.find(['formControlName', 'guess']);
       ngMocks.change(input, char);
       fixture.detectChanges();
       expect(ngMocks.findInstances(MatButton)[1].disabled).toEqual(false);
@@ -135,8 +143,8 @@ describe('GameComponent', () => {
       ngMocks.click(button);
       fixture.detectChanges();
       expect(spyOnDispatch).toHaveBeenCalledWith(
-        GameActions.tryChar({
-          char,
+        GameActions.guess({
+          charOrWord: char,
         })
       );
       expect(fixture.nativeElement.querySelector('input').value).toEqual('');

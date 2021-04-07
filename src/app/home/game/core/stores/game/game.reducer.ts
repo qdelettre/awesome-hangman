@@ -5,23 +5,29 @@ export const gameFeatureKey = 'game';
 
 export interface State {
   word: string | null;
-  chars: string[];
+  guess: string[];
+  rules: {
+    maxAttempts: number;
+  };
 }
 
 export const initialState: State = {
   word: null,
-  chars: [],
+  guess: [],
+  rules: {
+    maxAttempts: 7,
+  },
 };
 
 export const reducer = createReducer(
   initialState,
   on(GameActions.setWord, (state, { word }) => ({ ...state, word })),
-  on(GameActions.tryCharSuccess, (state, { char }) => ({
+  on(GameActions.guessSuccess, (state, { charOrWord: char }) => ({
     ...state,
-    chars: [...state.chars, char],
+    guess: [...state.guess, char],
   })),
-  on(GameActions.tryCharFailure, (state, { char }) => ({
+  on(GameActions.guessFailure, (state, { charOrWord: char }) => ({
     ...state,
-    chars: [...state.chars, char],
+    guess: [...state.guess, char],
   }))
 );

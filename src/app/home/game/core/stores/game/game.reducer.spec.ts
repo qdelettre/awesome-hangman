@@ -13,15 +13,15 @@ describe('Game Reducer', () => {
 
   it('should set char tryCharSuccess', () => {
     const char = 'w';
-    const action = GameActions.tryCharSuccess({ char });
+    const action = GameActions.guessSuccess({ charOrWord: char });
     const result = reducer(initialState, action);
-    expect(result).toEqual({ ...initialState, chars: [char] });
+    expect(result).toEqual({ ...initialState, guess: [char] });
   });
 
   it('should set char tryCharFailure', () => {
     const char = 'w';
-    const action = GameActions.tryCharFailure({ char });
+    const action = GameActions.guessFailure({ charOrWord: char });
     const result = reducer(initialState, action);
-    expect(result).toEqual({ ...initialState, chars: [char] });
+    expect(result).toEqual({ ...initialState, guess: [char] });
   });
 });
