@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  HostBinding,
+} from '@angular/core';
 
 @Component({
   selector: 'app-char',
@@ -7,5 +12,9 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharComponent {
-  @Input() char: string | undefined;
+  @HostBinding('class.space') get space() {
+    return this.char === ' ';
+  }
+
+  @Input() char: string | null = null;
 }

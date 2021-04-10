@@ -1,10 +1,9 @@
 import * as fromGame from './game.reducer';
 import {
-  getGuessChars,
+  getErrors,
   getGuessSorted,
-  getGuessWords,
   getLoose,
-  getMaxAttemptsReached,
+  getMaxErrorsReached,
   getWin,
   getWord,
   getWordChars,
@@ -40,26 +39,16 @@ describe('Game Selectors', () => {
         words,
       });
     });
-    it('should select the chars', () => {
-      const result = getGuessChars(mockState);
-
-      expect(result).toEqual(chars);
-    });
-    it('should select the words', () => {
-      const result = getGuessWords(mockState);
-
-      expect(result).toEqual(words);
-    });
   });
 
-  describe('MaxAttemptsReached', () => {
+  describe('maxErrorsReached', () => {
     const guess = [char, word];
     it('should select false when reached', () => {
-      const result = getMaxAttemptsReached({
+      const result = getMaxErrorsReached({
         [fromGame.gameFeatureKey]: {
           ...fromGame.initialState,
           guess,
-          rules: { maxAttempts: 10 },
+          rules: { maxErrors: 10 },
         },
       });
 
@@ -67,11 +56,11 @@ describe('Game Selectors', () => {
     });
 
     it('should select true when reached', () => {
-      const result = getMaxAttemptsReached({
+      const result = getMaxErrorsReached({
         [fromGame.gameFeatureKey]: {
           ...fromGame.initialState,
           guess,
-          rules: { maxAttempts: 1 },
+          rules: { maxErrors: 1 },
         },
       });
       expect(result).toEqual(true);
@@ -138,16 +127,27 @@ describe('Game Selectors', () => {
     expect(result).toEqual(false);
   });
 
-  it('should return true when loose', () => {
+  it('should return true when loose with char', () => {
     const result = getLoose({
       [fromGame.gameFeatureKey]: {
         ...fromGame.initialState,
-        rules: { maxAttempts: 1 },
+        rules: { maxErrors: 1 },
         word,
-        guess: [char],
+        guess: ['x'],
       },
     });
+    expect(result).toEqual(true);
+  });
 
+  it('should return true when loose with word', () => {
+    const result = getLoose({
+      [fromGame.gameFeatureKey]: {
+        ...fromGame.initialState,
+        rules: { maxErrors: 1 },
+        word,
+        guess: ['xx'],
+      },
+    });
     expect(result).toEqual(true);
   });
 
@@ -155,7 +155,7 @@ describe('Game Selectors', () => {
     const result = getLoose({
       [fromGame.gameFeatureKey]: {
         ...fromGame.initialState,
-        rules: { maxAttempts: 2 },
+        rules: { maxErrors: 2 },
         word,
         guess: [char],
       },

@@ -5,3 +5,7 @@ body {
 
 // Include all theme styles for the components.
 @include angular-material-theme($theme);
+
+body {
+  font-family: "Roboto", serif;
+}

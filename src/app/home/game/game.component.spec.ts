@@ -16,6 +16,7 @@ import { CdkTrapFocus } from '@angular/cdk/a11y';
 import * as GameActions from './core/stores/game/game.actions';
 import { MatChip, MatChipList } from '@angular/material/chips';
 import { MatCard } from '@angular/material/card';
+import { ErrorCountDisplayComponent } from './core/components/error-count-display/error-count-display.component';
 
 describe('GameComponent', () => {
   let component: GameComponent;
@@ -35,7 +36,8 @@ describe('GameComponent', () => {
           MatInput,
           MatCard,
           MatChipList,
-          MatChip
+          MatChip,
+          ErrorCountDisplayComponent
         ),
         MockDirectives(RouterLink, CdkTrapFocus),
       ],
@@ -97,10 +99,10 @@ describe('GameComponent', () => {
 
       const chars = ngMocks.findInstances(CharComponent);
       expect(chars.length).toEqual(4);
-      expect(chars[0].char).toEqual('');
-      expect(chars[1].char).toEqual('');
-      expect(chars[2].char).toEqual('');
-      expect(chars[3].char).toEqual('');
+      expect(chars[0].char).toEqual(null);
+      expect(chars[1].char).toEqual(null);
+      expect(chars[2].char).toEqual(null);
+      expect(chars[3].char).toEqual(null);
     });
 
     it('should show word length when chars', () => {
@@ -120,8 +122,8 @@ describe('GameComponent', () => {
       const chars = ngMocks.findInstances(CharComponent);
       expect(chars.length).toEqual(4);
       expect(chars[0].char).toEqual('w');
-      expect(chars[1].char).toEqual('');
-      expect(chars[2].char).toEqual('');
+      expect(chars[1].char).toEqual(null);
+      expect(chars[2].char).toEqual(null);
       expect(chars[3].char).toEqual('d');
     });
 

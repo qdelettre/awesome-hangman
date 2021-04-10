@@ -1,24 +1,32 @@
+@import "variables";
+
 #container-word-chars {
-  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-evenly;
   align-items: center;
   height: calc(50vh - 64px);
-}
-
-#container-chars {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 0 1rem 0 1rem;
+  margin: 0 16px 0 16px;
 }
 
 mat-card {
   margin: 1rem;
+}
+
+:host > mat-card {
+  min-height: 32px;
+  > div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    > * {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+    }
+  }
 }
 
 form {

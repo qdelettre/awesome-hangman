@@ -7,7 +7,7 @@ export interface State {
   word: string | null;
   guess: string[];
   rules: {
-    maxAttempts: number;
+    maxErrors: number;
   };
 }
 
@@ -15,7 +15,7 @@ export const initialState: State = {
   word: null,
   guess: [],
   rules: {
-    maxAttempts: 7,
+    maxErrors: 7,
   },
 };
 

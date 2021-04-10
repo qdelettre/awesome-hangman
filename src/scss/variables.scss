@@ -1,0 +1,6 @@
+@import "theme";
+
+$is-dark-theme: map-get($theme, is-dark);
+
+$cube-color-primary: if($is-dark-theme, #2d2c30, #d7d4e4);
+$cube-color-secondary: if($is-dark-theme, #000, #fff);

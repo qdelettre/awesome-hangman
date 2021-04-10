@@ -9,13 +9,19 @@
     <app-char *ngFor="let char of wordChars" [char]="char"></app-char>
   </div>
 
-  <div id="container-chars" *ngIf="chars$ | async as chars">
-    <mat-chip-list>
-      <mat-chip *ngFor="let char of chars">
-        {{ char }}
-      </mat-chip>
-    </mat-chip-list>
-  </div>
+  <mat-card>
+    <div>
+      <mat-chip-list>
+        <mat-chip *ngFor="let charOrWord of guess$ | async">
+          {{ charOrWord }}
+        </mat-chip>
+      </mat-chip-list>
+      <app-error-count-display
+        [count]="errors$ | async"
+        [max]="maxErrors$ | async"
+      ></app-error-count-display>
+    </div>
+  </mat-card>
 
   <mat-card>
     <form [formGroup]="formGroup" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
@@ -39,7 +45,7 @@
         [disabled]="formGroup.invalid"
         (click)="guess(); input.focus()"
       >
-        <mat-icon>edit</mat-icon>
+        <mat-icon matBadge="15" matBadgeColor="warn">edit</mat-icon>
       </button>
     </form>
   </mat-card>

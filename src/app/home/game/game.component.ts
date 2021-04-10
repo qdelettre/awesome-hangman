@@ -16,7 +16,10 @@ export class GameComponent {
   input!: MatInput;
 
   wordChars$ = this.store.select(fromGame.getWordChars);
-  chars$ = this.store.select(fromGame.getGuessChars);
+  guess$ = this.store.select(fromGame.getGuess);
+
+  maxErrors$ = this.store.select(fromGame.getMaxErrors);
+  errors$ = this.store.select(fromGame.getErrors);
 
   formGroup = this.fb.group({
     guess: [null, Validators.required],

@@ -7,7 +7,7 @@ const selectGameState = createFeatureSelector<fromGame.State>(
 
 export const getWord = createSelector(selectGameState, ({ word }) => word);
 
-const getGuess = createSelector(selectGameState, ({ guess }) => guess);
+export const getGuess = createSelector(selectGameState, ({ guess }) => guess);
 
 export const getGuessSorted = createSelector(getGuess, (guess) =>
   guess.reduce(
@@ -20,15 +20,6 @@ export const getGuessSorted = createSelector(getGuess, (guess) =>
       words: [],
     }
   )
-);
-
-export const getGuessChars = createSelector(
-  getGuessSorted,
-  ({ chars }) => chars
-);
-export const getGuessWords = createSelector(
-  getGuessSorted,
-  ({ words }) => words
 );
 
 const r = new RegExp('[^a-zA-Z]');
@@ -44,30 +35,35 @@ export const getWordChars = createSelector(
       return [...word];
     } else {
       return [...word].map((char) =>
-        chars.includes(char.toLowerCase()) || r.test(char) ? char : ''
+        chars.includes(char.toLowerCase()) || r.test(char) ? char : null
       );
     }
   }
 );
 
 const getRules = createSelector(selectGameState, ({ rules }) => rules);
-const getMaxAttempts = createSelector(
+export const getMaxErrors = createSelector(
   getRules,
-  ({ maxAttempts }) => maxAttempts
+  ({ maxErrors }) => maxErrors
 );
-const getAttempts = createSelector(getGuess, (guess) => guess.length);
+export const getErrors = createSelector(
+  getWord,
+  getGuessSorted,
+  (word, { chars, words }) =>
+    chars.filter((char) => !word?.toLowerCase().includes(char)).length +
+    words.filter((w) => w.toLowerCase() !== word?.toLowerCase()).length
+);
 
-export const getMaxAttemptsReached = createSelector(
-  getMaxAttempts,
-  getAttempts,
-  (maxAttempts, attempts) => attempts >= maxAttempts
+export const getMaxErrorsReached = createSelector(
+  getMaxErrors,
+  getErrors,
+  (maxErrors, errors) => errors >= maxErrors
 );
 
 export const getWin = createSelector(
   getWord,
-  getGuessWords,
-  getGuessChars,
-  (word, words, chars) =>
+  getGuessSorted,
+  (word, { words, chars }) =>
     !!word &&
     (words.filter((w) => w.toLowerCase() === word.toLowerCase()).length === 1 ||
       word.toLowerCase() === chars.join(''))
@@ -75,6 +71,6 @@ export const getWin = createSelector(
 
 export const getLoose = createSelector(
   getWin,
-  getMaxAttemptsReached,
-  (win, maxAttemptsReached) => !win && maxAttemptsReached
+  getMaxErrorsReached,
+  (win, maxErrorsReached) => !win && maxErrorsReached
 );

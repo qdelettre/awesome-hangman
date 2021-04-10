@@ -1,6 +1,6 @@
 @import "theme";
+@import "variables";
 
-$is-dark-theme: map-get($theme, is-dark);
 $foreground: map-get($theme, foreground);
 $text-color: if($is-dark-theme, mat-color($foreground, "text"), #fff);
 
