@@ -1,12 +1,9 @@
 @import "theme";
+@import "variables";
 
-$is-dark-theme: map-get($theme, is-dark);
 $primary: map-get($theme, primary);
 $accent: map-get($theme, accent);
 $background: map-get($theme, "background");
-
-$cube-color-primary: if($is-dark-theme, #2d2c30, #d7d4e4);
-$cube-color-secondary: if($is-dark-theme, #000, #fff);
 
 #background {
   z-index: -1;

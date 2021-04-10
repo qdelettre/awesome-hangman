@@ -21,9 +21,10 @@ import { StoreModule } from '@ngrx/store';
 import { CharComponent } from './core/components/char/char.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { A11yModule } from '@angular/cdk/a11y';
+import { ErrorCountDisplayComponent } from './core/components/error-count-display/error-count-display.component';
 
 @NgModule({
-  declarations: [GameComponent, CharComponent],
+  declarations: [GameComponent, CharComponent, ErrorCountDisplayComponent],
   imports: [
     A11yModule,
     CommonModule,
