@@ -9,8 +9,6 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let store: MockStore<RouterReducerState>;
 
-  let mockSelector;
-
   const initTestBed = () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
@@ -38,22 +36,26 @@ describe('AppComponent', () => {
   });
 
   it('should display background and cubes', () => {
-    mockSelector = store.overrideSelector(selectUrl, '/');
+    store.overrideSelector(selectUrl, '/');
     store.refreshState();
     fixture.detectChanges();
+
     expect(
       fixture.nativeElement.querySelector('#background')
     ).not.toBeUndefined();
+
     expect(fixture.nativeElement.querySelectorAll('.cube').length).toEqual(5);
   });
 
   it('should display background and not cubes on other routes', () => {
-    mockSelector = store.overrideSelector(selectUrl, '/fake');
+    store.overrideSelector(selectUrl, '/fake');
     store.refreshState();
     fixture.detectChanges();
+
     expect(
       fixture.nativeElement.querySelector('#background')
     ).not.toBeUndefined();
+
     expect(fixture.nativeElement.querySelectorAll('.cube').length).toEqual(0);
   });
 });

@@ -56,6 +56,7 @@ describe('GameEffects', () => {
       a: WordActions.loadWords(),
       b: GameActions.start(),
     });
+
     expect(effects.navigation$).toBeObservable(expected);
   });
 
@@ -76,6 +77,7 @@ describe('GameEffects', () => {
     const expected = cold('-a-', {
       a: GameActions.start(),
     });
+
     expect(effects.navigation$).toBeObservable(expected);
   });
 
@@ -86,6 +88,7 @@ describe('GameEffects', () => {
       a: GameActions.start,
     });
     const expected = cold('---');
+
     expect(effects.start$).toBeObservable(expected);
   });
 
@@ -100,6 +103,7 @@ describe('GameEffects', () => {
         word: 'word',
       }),
     });
+
     expect(effects.start$).toBeObservable(expected);
   });
 
@@ -118,6 +122,7 @@ describe('GameEffects', () => {
           charOrWord,
         }),
       });
+
       expect(effects.guess$).toBeObservable(expected);
     });
 
@@ -131,6 +136,7 @@ describe('GameEffects', () => {
           charOrWord,
         }),
       });
+
       expect(effects.guess$).toBeObservable(expected);
     });
 
@@ -144,6 +150,7 @@ describe('GameEffects', () => {
       const expected = cold('-a-', {
         a: GameActions.loose(),
       });
+
       expect(effects.loose$).toBeObservable(expected);
     });
 
@@ -157,6 +164,7 @@ describe('GameEffects', () => {
       const expected = cold('-a-', {
         a: GameActions.win(),
       });
+
       expect(effects.win$).toBeObservable(expected);
     });
   });
@@ -170,6 +178,7 @@ describe('GameEffects', () => {
     const expected = cold('-a-', {
       a,
     });
+
     expect(effects.gameOver$).toBeObservable(expected);
     expect(spyOnNavigate).toHaveBeenCalledWith(['game', 'over']);
   });

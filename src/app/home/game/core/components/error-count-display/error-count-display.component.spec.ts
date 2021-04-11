@@ -27,6 +27,7 @@ describe('ErrorCountDisplayComponent', () => {
     component.count = 1;
     component.max = 2;
     fixture.detectChanges();
+
     expect(
       fixture.nativeElement.querySelector('span.mat-body-strong').textContent
     ).toEqual('1 / 2 errors');

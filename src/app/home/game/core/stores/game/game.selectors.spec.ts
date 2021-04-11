@@ -1,6 +1,5 @@
 import * as fromGame from './game.reducer';
 import {
-  getErrors,
   getGuessSorted,
   getLoose,
   getMaxErrorsReached,
@@ -63,6 +62,7 @@ describe('Game Selectors', () => {
           rules: { maxErrors: 1 },
         },
       });
+
       expect(result).toEqual(true);
     });
   });
@@ -80,7 +80,7 @@ describe('Game Selectors', () => {
       expect(result).toEqual([...word]);
     });
 
-    it('should return the word when word is in guess', () => {
+    it('should return the word when word is in guess as chars', () => {
       const result = getWordChars({
         [fromGame.gameFeatureKey]: {
           ...fromGame.initialState,
@@ -136,6 +136,7 @@ describe('Game Selectors', () => {
         guess: ['x'],
       },
     });
+
     expect(result).toEqual(true);
   });
 
@@ -148,6 +149,7 @@ describe('Game Selectors', () => {
         guess: ['xx'],
       },
     });
+
     expect(result).toEqual(true);
   });
 

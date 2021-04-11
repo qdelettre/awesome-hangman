@@ -33,14 +33,16 @@ describe('OverComponent', () => {
     ).toEqual('Game over !');
   });
 
-  it('should have title', () => {
+  it('should have title button and link', () => {
     const button = ngMocks.findInstance(MatButton);
+
     expect(button.color).toEqual('primary');
     expect(fixture.nativeElement.querySelector('button').textContent).toEqual(
       'Play again'
     );
 
     const routerLink = ngMocks.findInstance(RouterLink);
+
     expect(routerLink.routerLink).toEqual('..');
   });
 });

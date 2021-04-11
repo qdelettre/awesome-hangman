@@ -1,6 +1,9 @@
 {
   "root": true,
+  "extends": ["eslint:recommended", "plugin:jasmine/recommended"],
   "ignorePatterns": ["projects/**/*"],
+  "plugins": ["jasmine"],
+  "env": { "jasmine": true },
   "overrides": [
     {
       "files": ["*.ts"],
@@ -29,7 +32,13 @@
             "prefix": "app",
             "style": "camelCase"
           }
-        ]
+        ],
+        "no-console": 2,
+        "no-alert": 2,
+        "no-eval": 2,
+        "no-shadow": 0,
+        "@typescript-eslint/no-shadow": 2,
+        "no-unused-vars": [2, { "args": "all", "argsIgnorePattern": "^_" }]
       }
     },
     {

@@ -11,6 +11,7 @@ describe('WordEffects', () => {
   let actions$: Observable<any>;
   let effects: WordEffects;
 
+  // eslint-disable-next-line jasmine/no-unsafe-spy
   const wordsService = jasmine.createSpyObj<WordsService>('wordService', [
     'get',
   ]);
@@ -47,6 +48,7 @@ describe('WordEffects', () => {
         words: WordApiResponseMocks.default.values,
       }),
     });
+
     expect(effects.loadWords$).toBeObservable(expected);
   });
 
@@ -59,6 +61,7 @@ describe('WordEffects', () => {
     const expected = cold('-a-', {
       a: WordActions.loadWordsFailure({ error: 'error' }),
     });
+
     expect(effects.loadWords$).toBeObservable(expected);
   });
 });

@@ -27,6 +27,7 @@ describe('CharComponent', () => {
     const char = 'x';
     component.char = char;
     fixture.detectChanges();
+
     expect(fixture.nativeElement.querySelector('span').textContent).toEqual(
       char
     );
@@ -35,6 +36,7 @@ describe('CharComponent', () => {
   it('should not have char and space true', () => {
     component.char = null;
     fixture.detectChanges();
+
     expect(fixture.nativeElement.querySelector('span').textContent).toEqual('');
   });
 });

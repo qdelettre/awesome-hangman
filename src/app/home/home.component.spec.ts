@@ -39,6 +39,7 @@ describe('HomeComponent', () => {
       'Start'
     );
     const mockDirective = ngMocks.get(ngMocks.find('button'), RouterLink);
+
     expect(mockDirective.routerLink).toEqual('game');
   });
 });

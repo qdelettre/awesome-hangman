@@ -65,6 +65,7 @@ describe('GameComponent', () => {
 
   it('should have toolbar', () => {
     const mockToolbar = ngMocks.findInstance(MatToolbar);
+
     expect(mockToolbar.color).toEqual('primary');
   });
 
@@ -74,6 +75,7 @@ describe('GameComponent', () => {
         .querySelector('mat-toolbar button')
         .textContent.trim()
     ).toEqual('arrow_backReturn');
+
     expect(
       fixture.nativeElement.querySelector('mat-toolbar button mat-icon')
         .textContent
@@ -83,6 +85,7 @@ describe('GameComponent', () => {
       ngMocks.find('mat-toolbar button'),
       RouterLink
     );
+
     expect(mockDirective.routerLink).toEqual('..');
   });
 
@@ -93,11 +96,13 @@ describe('GameComponent', () => {
       });
       store.refreshState();
       fixture.detectChanges();
+
       expect(
         fixture.nativeElement.querySelector('container-chars')
       ).not.toBeUndefined();
 
       const chars = ngMocks.findInstances(CharComponent);
+
       expect(chars.length).toEqual(4);
       expect(chars[0].char).toEqual(null);
       expect(chars[1].char).toEqual(null);
@@ -115,11 +120,13 @@ describe('GameComponent', () => {
       });
       store.refreshState();
       fixture.detectChanges();
+
       expect(
         fixture.nativeElement.querySelector('container-chars')
       ).not.toBeUndefined();
 
       const chars = ngMocks.findInstances(CharComponent);
+
       expect(chars.length).toEqual(4);
       expect(chars[0].char).toEqual('w');
       expect(chars[1].char).toEqual(null);
@@ -139,16 +146,19 @@ describe('GameComponent', () => {
       const input = ngMocks.find(['formControlName', 'guess']);
       ngMocks.change(input, char);
       fixture.detectChanges();
+
       expect(ngMocks.findInstances(MatButton)[1].disabled).toEqual(false);
 
       const button = ngMocks.find('form button');
       ngMocks.click(button);
       fixture.detectChanges();
+
       expect(spyOnDispatch).toHaveBeenCalledWith(
         GameActions.guess({
           charOrWord: char,
         })
       );
+
       expect(fixture.nativeElement.querySelector('input').value).toEqual('');
       expect(ngMocks.findInstances(MatButton)[1].disabled).toEqual(true);
     });
