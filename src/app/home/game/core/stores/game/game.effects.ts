@@ -57,33 +57,28 @@ export class GameEffects {
     )
   );
 
-  loose$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(GameActions.guessFailure),
-      concatLatestFrom(() =>
-        this.store.select(fromGame.getLoose).pipe(filter((loose) => !!loose))
-      ),
-      concatMap(() => [GameActions.loose()])
-    )
-  );
-
-  gameOver$ = createEffect(
+  loose$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(GameActions.loose),
+        ofType(GameActions.guessFailure),
+        concatLatestFrom(() =>
+          this.store.select(fromGame.getLoose).pipe(filter((loose) => !!loose))
+        ),
         tap(() => this.router.navigate(['game', 'over']))
       ),
     { dispatch: false }
   );
 
-  win$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(GameActions.guessSuccess),
-      concatLatestFrom(() =>
-        this.store.select(fromGame.getWin).pipe(filter((win) => !!win))
+  win$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(GameActions.guessSuccess),
+        concatLatestFrom(() =>
+          this.store.select(fromGame.getWin).pipe(filter((win) => !!win))
+        ),
+        tap(() => this.router.navigate(['game', 'win']))
       ),
-      concatMap(() => [GameActions.win()])
-    )
+    { dispatch: false }
   );
 
   constructor(

@@ -139,47 +139,44 @@ describe('GameEffects', () => {
 
       expect(effects.guess$).toBeObservable(expected);
     });
+  });
 
-    it('should emit loose on guessFailure when loosing', () => {
+  describe('on loosing or winning', () => {
+    let spyOnNavigate: jasmine.Spy;
+    const charOrWord = 'x';
+
+    beforeEach(() => {
+      spyOnNavigate = spyOn(router, 'navigate');
+    });
+
+    it('should navigate to game over on loose', () => {
       store.overrideSelector(fromGame.getLoose, true);
 
-      const charOrWord = 'x';
+      const a = GameActions.guessFailure({ charOrWord });
       actions$ = hot('-a-', {
-        a: GameActions.guessFailure({ charOrWord }),
+        a,
       });
       const expected = cold('-a-', {
-        a: GameActions.loose(),
+        a: [a, true],
       });
 
       expect(effects.loose$).toBeObservable(expected);
+      expect(spyOnNavigate).toHaveBeenCalledWith(['game', 'over']);
     });
 
-    it('should emit win on guessFailure when winning', () => {
+    it('should navigate to win on winning', () => {
       store.overrideSelector(fromGame.getWin, true);
 
-      const charOrWord = 'W';
+      const a = GameActions.guessSuccess({ charOrWord });
       actions$ = hot('-a-', {
-        a: GameActions.guessSuccess({ charOrWord }),
+        a,
       });
       const expected = cold('-a-', {
-        a: GameActions.win(),
+        a: [a, true],
       });
 
       expect(effects.win$).toBeObservable(expected);
+      expect(spyOnNavigate).toHaveBeenCalledWith(['game', 'win']);
     });
-  });
-
-  it('should navigate to game over on loose', () => {
-    const spyOnNavigate = spyOn(router, 'navigate');
-    const a = GameActions.loose;
-    actions$ = hot('-a-', {
-      a,
-    });
-    const expected = cold('-a-', {
-      a,
-    });
-
-    expect(effects.gameOver$).toBeObservable(expected);
-    expect(spyOnNavigate).toHaveBeenCalledWith(['game', 'over']);
   });
 });

@@ -3,22 +3,22 @@ import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MockComponent, MockDirective, ngMocks } from 'ng-mocks';
 
-import { OverComponent } from './over.component';
+import { WinComponent } from './win.component';
 
-describe('OverComponent', () => {
-  let component: OverComponent;
-  let fixture: ComponentFixture<OverComponent>;
+describe('WinComponent', () => {
+  let component: WinComponent;
+  let fixture: ComponentFixture<WinComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        OverComponent,
+        WinComponent,
         MockComponent(MatButton),
         MockDirective(RouterLink),
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(OverComponent);
+    fixture = TestBed.createComponent(WinComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -30,7 +30,7 @@ describe('OverComponent', () => {
   it('should have title', () => {
     expect(
       fixture.nativeElement.querySelector('h1.mat-display-1').textContent
-    ).toEqual('Game over !');
+    ).toEqual('You won !');
   });
 
   it('should have buttons and links', () => {
