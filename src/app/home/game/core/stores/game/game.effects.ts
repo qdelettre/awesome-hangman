@@ -1,15 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { RouterNavigationAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
 
-import {
-  concatMap,
-  filter,
-  first,
-  map,
-  switchMap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { concatMap, filter, first, map, switchMap, tap } from 'rxjs/operators';
 
 import * as WordActions from '../word/word.actions';
 import * as GameActions from '../game/game.actions';
@@ -17,6 +10,7 @@ import * as fromWord from '../word/word.selectors';
 import * as fromGame from './game.selectors';
 
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class GameEffects {
@@ -24,7 +18,12 @@ export class GameEffects {
     this.actions$.pipe(
       ofType<RouterNavigationAction>(ROUTER_NAVIGATION),
       filter(({ payload }) => payload.routerState.url === '/game'),
-      concatMap(() => [WordActions.loadWords(), GameActions.start()])
+      concatLatestFrom(() => this.store.select(fromWord.getWords)),
+      concatMap(([_, words]) => [
+        ...(words.length
+          ? [GameActions.start()]
+          : [WordActions.loadWords(), GameActions.start()]),
+      ])
     )
   );
 
@@ -45,7 +44,7 @@ export class GameEffects {
     this.actions$.pipe(
       ofType(GameActions.guess),
       map(({ charOrWord }) => charOrWord),
-      withLatestFrom(
+      concatLatestFrom(() =>
         this.store
           .select(fromGame.getWord)
           .pipe(filter((word): word is string => !!word))
@@ -61,22 +60,35 @@ export class GameEffects {
   loose$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GameActions.guessFailure),
-      withLatestFrom(
+      concatLatestFrom(() =>
         this.store.select(fromGame.getLoose).pipe(filter((loose) => !!loose))
       ),
       concatMap(() => [GameActions.loose()])
     )
   );
 
+  gameOver$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(GameActions.loose),
+        tap(() => this.router.navigate(['game', 'over']))
+      ),
+    { dispatch: false }
+  );
+
   win$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GameActions.guessSuccess),
-      withLatestFrom(
+      concatLatestFrom(() =>
         this.store.select(fromGame.getWin).pipe(filter((win) => !!win))
       ),
       concatMap(() => [GameActions.win()])
     )
   );
 
-  constructor(private actions$: Actions, private store: Store) {}
+  constructor(
+    private actions$: Actions,
+    private store: Store,
+    private router: Router
+  ) {}
 }

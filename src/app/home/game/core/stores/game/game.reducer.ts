@@ -22,6 +22,7 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
   on(GameActions.setWord, (state, { word }) => ({ ...state, word })),
+  on(GameActions.start, (state) => ({ ...state, guess: initialState.guess })),
   on(GameActions.guessSuccess, (state, { charOrWord: char }) => ({
     ...state,
     guess: [...state.guess, char],
