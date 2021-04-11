@@ -10,14 +10,18 @@ import { GameEffects } from './game.effects';
 import * as fromWord from '../word/word.selectors';
 import * as fromGame from './game.selectors';
 import { ROUTER_NAVIGATION } from '@ngrx/router-store';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 describe('GameEffects', () => {
   let actions$: Observable<any>;
   let effects: GameEffects;
   let store: MockStore;
+  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       providers: [
         GameEffects,
         provideMockActions(() => actions$),
@@ -27,13 +31,15 @@ describe('GameEffects', () => {
 
     effects = TestBed.inject(GameEffects);
     store = TestBed.inject(MockStore);
+    router = TestBed.inject(Router);
   });
 
   it('should be created', () => {
     expect(effects).toBeTruthy();
   });
 
-  it('should load words and start on navigation', () => {
+  it('should load words and start on navigation when no words', () => {
+    store.overrideSelector(fromWord.getWords, []);
     const routerNavigationAction = {
       type: ROUTER_NAVIGATION,
       payload: {
@@ -49,6 +55,26 @@ describe('GameEffects', () => {
     const expected = cold('-(ab)-', {
       a: WordActions.loadWords(),
       b: GameActions.start(),
+    });
+    expect(effects.navigation$).toBeObservable(expected);
+  });
+
+  it('should not load words and start on navigation when words', () => {
+    store.overrideSelector(fromWord.getWords, ['word']);
+    const routerNavigationAction = {
+      type: ROUTER_NAVIGATION,
+      payload: {
+        routerState: {
+          url: '/game',
+        },
+      },
+    };
+
+    actions$ = hot('-a-', {
+      a: routerNavigationAction,
+    });
+    const expected = cold('-a-', {
+      a: GameActions.start(),
     });
     expect(effects.navigation$).toBeObservable(expected);
   });
@@ -133,5 +159,18 @@ describe('GameEffects', () => {
       });
       expect(effects.win$).toBeObservable(expected);
     });
+  });
+
+  it('should navigate to game over on loose', () => {
+    const spyOnNavigate = spyOn(router, 'navigate');
+    const a = GameActions.loose;
+    actions$ = hot('-a-', {
+      a,
+    });
+    const expected = cold('-a-', {
+      a,
+    });
+    expect(effects.gameOver$).toBeObservable(expected);
+    expect(spyOnNavigate).toHaveBeenCalledWith(['game', 'over']);
   });
 });

@@ -11,6 +11,7 @@ export const guess = createAction(
   '[Game] Guess',
   props<{ charOrWord: string }>()
 );
+
 export const guessSuccess = createAction(
   '[Game] Guess success',
   props<{ charOrWord: string }>()
