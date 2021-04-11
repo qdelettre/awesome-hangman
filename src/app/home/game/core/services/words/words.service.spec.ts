@@ -39,6 +39,7 @@ describe('WordsService', () => {
       }, done.fail);
 
     const req = httpMock.expectOne((r) => r.url === url);
+
     expect(req.request.method).toEqual('GET');
     expect(req.request.body).toEqual(null);
     req.flush(WordApiResponseMocks.default);
