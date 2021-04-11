@@ -8,6 +8,10 @@ const routes: Routes = [
     path: 'over',
     loadChildren: () => import('./over/over.module').then((m) => m.OverModule),
   },
+  {
+    path: 'win',
+    loadChildren: () => import('./win/win.module').then((m) => m.WinModule),
+  },
 ];
 
 @NgModule({
