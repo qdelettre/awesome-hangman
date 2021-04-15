@@ -42,7 +42,12 @@ testem.log
 /typings
 .yarnrc
 .npmrc
+.nvmrc
 
 # System Files
 .DS_Store
 Thumbs.db
+
+# cypress
+cypress/videos
+cypress/screenshots
