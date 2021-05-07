@@ -64,7 +64,6 @@ it('should loose', () => {
 
   cy.get('input').type('d');
   cy.get('mat-card:nth-of-type(2) button').click();
-  cy.get('app-error-count-display').contains('7 / 7 errors');
 
   cy.url().should('eq', `${Cypress.config().baseUrl}game/over`);
 });
