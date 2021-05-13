@@ -1,3 +1,34 @@
 {
-  "extends": ["config:base"]
+  "extends": ["config:base"],
+  "packageRules": [
+    {
+      "extends": "monorepo:angular-eslint",
+      "groupName": "angular-eslint monorepo"
+    },
+    {
+      "extends": "monorepo:angular",
+      "groupName": "angular monorepo"
+    },
+    {
+      "extends": "monorepo:angularcli",
+      "groupName": "angularcli monorepo"
+    },
+    {
+      "extends": "monorepo:angularmaterial",
+      "groupName": "angularmaterial monorepo"
+    },
+    {
+      "extends": "monorepo:ngrx",
+      "groupName": "ngrx monorepo"
+    },
+    {
+      "extends": "monorepo:jasmine",
+      "groupName": "jasmine monorepo"
+    },
+    {
+      "extends": "monorepo:typescript-eslint",
+      "groupName": "typescript-eslint monorepo"
+    }
+  ],
+  "schedule": ["before 8am"]
 }
