@@ -1,8 +1,12 @@
 {
   "root": true,
-  "extends": ["eslint:recommended", "plugin:jasmine/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:jasmine/recommended",
+    "plugin:regexp/recommended"
+  ],
   "ignorePatterns": ["projects/**/*"],
-  "plugins": ["jasmine"],
+  "plugins": ["jasmine", "regexp"],
   "env": { "jasmine": true },
   "overrides": [
     {

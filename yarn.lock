@@ -2044,9 +2044,9 @@ ajv@^6.1.0, ajv@^6.10.0, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5:
     uri-js "^4.2.2"
 
 ajv@^8.0.0:
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.3.0.tgz#25ee7348e32cdc4a1dbb38256bf6bdc451dd577c"
-  integrity sha512-RYE7B5An83d7eWnDR8kbdaIFqmKCNsP16ay1hDbJEU+sa0e3H9SebskCt0Uufem6cfAVu7Col6ubcn/W+Sm8/Q==
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.4.0.tgz#48984fdb2ce225cab15795f0772a8d85669075e4"
+  integrity sha512-7QD2l6+KBSLwf+7MuYocbWvRPdOu63/trReTLu2KFwkgctnub1auoF+Y1WYcm09CTM7quuscrzqmASaLHC/K4Q==
   dependencies:
     fast-deep-equal "^3.1.1"
     json-schema-traverse "^1.0.0"
@@ -2985,7 +2985,7 @@ commander@^7.1.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-7.2.0.tgz#a36cb57d0b501ce108e4d20559a150a391d97ab7"
   integrity sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==
 
-comment-parser@1.1.5, comment-parser@^1.1.5:
+comment-parser@1.1.5, comment-parser@^1.1.2, comment-parser@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/comment-parser/-/comment-parser-1.1.5.tgz#453627ef8f67dbcec44e79a9bd5baa37f0bce9b2"
   integrity sha512-RePCE4leIhBlmrqiYTvaqEeGYg7qpSl4etaIabKtdOQVi+mSTIBBklGUwIr79GXYnl3LpMwmDw4KeR2stNc6FA==
@@ -3992,6 +3992,18 @@ eslint-plugin-prettier@3.4.0:
   integrity sha512-UDK6rJT6INSfcOo545jiaOwB701uAIt2/dR7WnFQoGCVl1/EMqdANBmwUaqqQ45aXprsTGzSa39LI1PyuRBxxw==
   dependencies:
     prettier-linter-helpers "^1.0.0"
+
+eslint-plugin-regexp@0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-regexp/-/eslint-plugin-regexp-0.10.0.tgz#5391e21d805bce53b6846446fe4aed7961f33b62"
+  integrity sha512-KwIdNUnwz9CFZ1jApWZ++Y1cVWbJBYdJHMDh7KNe9HpElSwHGZHtX1QaHq3Iv2nMYJitGIE6JdkYbfzm9BzPQw==
+  dependencies:
+    comment-parser "^1.1.2"
+    eslint-utils "^2.1.0"
+    jsdoctypeparser "^9.0.0"
+    refa "^0.8.0"
+    regexp-ast-analysis "^0.2.0"
+    regexpp "^3.1.0"
 
 eslint-scope@^5.0.0, eslint-scope@^5.1.0, eslint-scope@^5.1.1:
   version "5.1.1"
@@ -7944,6 +7956,13 @@ readdirp@~3.5.0:
   dependencies:
     picomatch "^2.2.1"
 
+refa@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/refa/-/refa-0.8.0.tgz#81813b0ac80fd6e2d79f191e31054f210ef80a53"
+  integrity sha512-qOf9zk1McAuGPtQ16nzuWCUg9zx3Quc48i6oD6nxWJdrFeh3Do0vCpIGYLij/1ysAbh5rxdUNg+YzSVBRycX5g==
+  dependencies:
+    regexpp "^3.1.0"
+
 reflect-metadata@^0.1.2:
   version "0.1.13"
   resolved "https://registry.npmjs.org/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
@@ -7985,6 +8004,14 @@ regex-parser@^2.2.11:
   version "2.2.11"
   resolved "https://registry.npmjs.org/regex-parser/-/regex-parser-2.2.11.tgz#3b37ec9049e19479806e878cabe7c1ca83ccfe58"
   integrity sha512-jbD/FT0+9MBU2XAZluI7w2OBs1RBi6p9M83nkoZayQXXU9e8Robt69FcZc7wU4eJD/YFTjn1JdCk3rbMJajz8Q==
+
+regexp-ast-analysis@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/regexp-ast-analysis/-/regexp-ast-analysis-0.2.0.tgz#2d676024539dc11a0d99d0ddf861d818ba20a1b5"
+  integrity sha512-ZVNwBF65Gn4CbRdPNYle8NAPFSDbbJ83svYUk4Mpqmr1QTUx2M06my9x7o8Hw/oFXDwXrJo/7W+ijLfFM5oG2Q==
+  dependencies:
+    refa "^0.8.0"
+    regexpp "^3.1.0"
 
 regexp.prototype.flags@^1.2.0:
   version "1.3.1"

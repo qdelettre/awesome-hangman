@@ -22,7 +22,7 @@ export const getGuessSorted = createSelector(getGuess, (guess) =>
   )
 );
 
-const r = new RegExp('[^a-zA-Z]');
+const r = /[^a-zA-Z]/;
 export const getWordChars = createSelector(
   getWord,
   getGuessSorted,
