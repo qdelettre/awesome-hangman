@@ -45,7 +45,7 @@
     "@briebug/cypress-schematic": "5.0.0",
     "@cypress/webpack-preprocessor": "5.7.0",
     "@types/jasmine": "3.7.6",
-    "@types/node": "12.20.12",
+    "@types/node": "12.20.14",
     "@typescript-eslint/eslint-plugin": "4.23.0",
     "@typescript-eslint/parser": "4.23.0",
     "cypress": "7.3.0",
