@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { WordApiResponse } from '../../models/word-api-response';
 
 export const url = `https://gist.githubusercontent.com/
-ruizalexandre/13e65c88e7ab65f88f13a01928632311/
-raw/59d0ba6a5ba865967cc2de2619300613bfd2f55c/pendu.json`;
+qdelettre/f5e23d9421769d3df3119dc7f8ff1e09/
+raw/a84c8e1142d157110ac2f62285841213eb970652/pendu.json`;
 
 @Injectable({
   providedIn: 'root',
