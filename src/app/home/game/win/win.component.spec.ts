@@ -35,9 +35,8 @@ describe('WinComponent', () => {
 
   it('should have buttons and links', () => {
     const buttons = ngMocks.findInstances(MatButton);
-    const buttonNodeList: NodeList = fixture.nativeElement.querySelectorAll(
-      'button'
-    );
+    const buttonNodeList: NodeList =
+      fixture.nativeElement.querySelectorAll('button');
 
     expect(buttons[0].color).toEqual('primary');
     expect(buttonNodeList[0].textContent).toEqual('Play again');
