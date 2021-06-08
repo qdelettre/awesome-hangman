@@ -21,7 +21,8 @@ describe('OverGuard', () => {
   const router = jasmine.createSpyObj<Router>('router', ['createUrlTree']);
   router.createUrlTree.and.returnValue(urlTree);
 
-  const activatedRouteSnapshot: ActivatedRouteSnapshot = new ActivatedRouteSnapshot();
+  const activatedRouteSnapshot: ActivatedRouteSnapshot =
+    new ActivatedRouteSnapshot();
   const routerStateSnapshot = jasmine.createSpyObj<RouterStateSnapshot>(
     'routerStateSnapshot',
     ['toString']
