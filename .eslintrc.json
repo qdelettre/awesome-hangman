@@ -42,6 +42,7 @@
         "no-eval": 2,
         "no-shadow": 0,
         "@typescript-eslint/no-shadow": 2,
+        "@typescript-eslint/member-ordering": 1, 
         "no-unused-vars": [2, { "args": "all", "argsIgnorePattern": "^_" }]
       }
     },
