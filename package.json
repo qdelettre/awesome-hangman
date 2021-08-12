@@ -28,7 +28,7 @@
     "@ngrx/router-store": "12.4.0",
     "@ngrx/store": "12.4.0",
     "@ngrx/store-devtools": "12.4.0",
-    "rxjs": "6.6.7",
+    "rxjs": "7.3.0",
     "tslib": "2.3.1",
     "zone.js": "0.11.4"
   },
@@ -58,7 +58,7 @@
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-regexp": "0.12.1",
     "jasmine-core": "3.8.0",
-    "jasmine-marbles": "0.8.3",
+    "jasmine-marbles": "0.9.0",
     "jasmine-spec-reporter": "7.0.0",
     "karma": "6.3.4",
     "karma-chrome-launcher": "3.1.0",
