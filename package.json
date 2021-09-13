@@ -65,7 +65,7 @@
     "karma-coverage": "2.0.3",
     "karma-jasmine": "4.0.1",
     "karma-jasmine-html-reporter": "1.7.0",
-    "ng-mocks": "12.4.0",
+    "ng-mocks": "12.5.0",
     "prettier": "2.3.1",
     "ts-loader": "9.2.5",
     "ts-node": "10.2.1",
