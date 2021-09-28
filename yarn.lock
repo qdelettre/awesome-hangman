@@ -5762,10 +5762,10 @@ jasmine-core@^3.6.0:
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-3.7.1.tgz#0401327f6249eac993d47bbfa18d4e8efacfb561"
   integrity sha512-DH3oYDS/AUvvr22+xUBW62m1Xoy7tUlY1tsxKEJvl5JeJ7q8zd1K5bUwiOxdH+erj6l2vAMM3hV25Xs9/WrmuQ==
 
-jasmine-marbles@0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/jasmine-marbles/-/jasmine-marbles-0.9.0.tgz#753f60706470ef8714c35b07937a2368be31dab9"
-  integrity sha512-VrkJyGwIUmTzJnWxWQyVigOIJ6dn4nHRewNaCMiLn0E/fBpombRdtlL3xZ/fnJZp0SAU4nJsVThLWTb3MaiVAw==
+jasmine-marbles@0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/jasmine-marbles/-/jasmine-marbles-0.9.1.tgz#1548110e8c3a64276554443275bcc7fef2a12c74"
+  integrity sha512-25Chb942ory0DlHmVujMsA/rMNLhsmXkEVegrXJZL+T9jZGDZyFTnH9Eb91/WIfNFuXwtGms7KzFNbuR8GIrqw==
   dependencies:
     lodash "^4.17.20"
 
