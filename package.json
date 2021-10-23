@@ -56,7 +56,7 @@
     "eslint-plugin-jsdoc": "35.3.2",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "eslint-plugin-prettier": "3.4.0",
-    "eslint-plugin-regexp": "0.12.1",
+    "eslint-plugin-regexp": "0.13.2",
     "jasmine-core": "3.10.1",
     "jasmine-marbles": "0.9.1",
     "jasmine-spec-reporter": "7.0.0",
