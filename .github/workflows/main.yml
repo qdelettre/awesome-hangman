@@ -31,6 +31,12 @@ jobs:
       - name: Build
         run: yarn run build --configuration production
 
+      - name: Run lint check
+        run: yarn run lint
+
+      - name: Run format check
+        run: yarn run format:check
+
       - name: Test
         run: yarn test --code-coverage --watch false
 
