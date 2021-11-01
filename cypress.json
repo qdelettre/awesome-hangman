@@ -2,6 +2,7 @@
   "integrationFolder": "cypress/integration",
   "supportFile": "cypress/support/index.ts",
   "videosFolder": "cypress/videos",
+  "videoCompression": 51,
   "screenshotsFolder": "cypress/screenshots",
   "pluginsFile": "cypress/plugins/index.js",
   "fixturesFolder": "cypress/fixtures",
