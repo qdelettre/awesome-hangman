@@ -6,8 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "ng lint --fix",
+    "lint:check": "ng lint",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "e2e": "ng e2e",
     "e2e-run": "ng run awesome-hangman:cypress-run",
     "e2e-open": "ng run awesome-hangman:cypress-open"
