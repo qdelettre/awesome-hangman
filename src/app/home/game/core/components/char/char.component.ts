@@ -12,9 +12,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharComponent {
+  @Input() char: string | null = null;
   @HostBinding('class.space') get space() {
     return this.char === ' ';
   }
-
-  @Input() char: string | null = null;
 }
