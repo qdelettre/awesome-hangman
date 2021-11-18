@@ -64,7 +64,7 @@ export const getWin = createSelector(
   (word, { words, chars }) =>
     !!word &&
     (words.some((w) => w.toLowerCase() === word.toLowerCase()) ||
-      word.split(/[^a-zA-Z]?/g).every((w) => chars.includes(w.toLowerCase())))
+      word.split(/[^a-zA-Z]?/).every((w) => chars.includes(w.toLowerCase())))
 );
 
 export const getLoose = createSelector(
