@@ -7,35 +7,37 @@ import {
 } from './word.selectors';
 
 describe('Word Selectors', () => {
+  const initialState = { ...fromWord.initialState };
+
   it('should select the feature state', () => {
     const result = selectWordState({
-      [fromWord.wordFeatureKey]: fromWord.initialState,
+      [fromWord.wordFeatureKey]: initialState,
     });
 
-    expect(result).toEqual(fromWord.initialState);
+    expect(result).toEqual(initialState);
   });
 
   it('should select the request state', () => {
     const result = getRequestState({
-      [fromWord.wordFeatureKey]: fromWord.initialState,
+      [fromWord.wordFeatureKey]: initialState,
     });
 
-    expect(result).toEqual(fromWord.initialState.requestState);
+    expect(result).toEqual(initialState.requestState);
   });
 
   it('should select get words', () => {
     const result = getWords({
-      [fromWord.wordFeatureKey]: fromWord.initialState,
+      [fromWord.wordFeatureKey]: initialState,
     });
 
-    expect(result).toEqual(fromWord.initialState.words);
+    expect(result).toEqual(initialState.words);
   });
 
   it('should get word when words', () => {
     const word = 'word';
     const result = getWord(
       {
-        [fromWord.wordFeatureKey]: { ...fromWord.initialState, words: [word] },
+        [fromWord.wordFeatureKey]: { ...initialState, words: [word] },
       },
       { random: 0 }
     );
@@ -46,7 +48,7 @@ describe('Word Selectors', () => {
   it('should return null when words empty', () => {
     const result = getWord(
       {
-        [fromWord.wordFeatureKey]: { ...fromWord.initialState, words: [] },
+        [fromWord.wordFeatureKey]: { ...initialState, words: [] },
       },
       { random: 0 }
     );
