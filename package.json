@@ -46,7 +46,7 @@
     "@cypress/webpack-preprocessor": "5.11.1",
     "@ngrx/schematics": "13.0.2",
     "@types/jasmine": "3.10.3",
-    "@types/node": "16.11.22",
+    "@types/node": "16.11.24",
     "@typescript-eslint/eslint-plugin": "5.11.0",
     "@typescript-eslint/parser": "5.11.0",
     "cypress": "9.4.1",
