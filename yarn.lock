@@ -6430,10 +6430,10 @@ neo-async@^2.6.2:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ng-mocks@13.0.2:
-  version "13.0.2"
-  resolved "https://registry.yarnpkg.com/ng-mocks/-/ng-mocks-13.0.2.tgz#0182e83fe1e6a4a6e441300972eef3acadf7697a"
-  integrity sha512-3CJt3WMI9mZLHEdG2hOms648lQJbrYN4zfwT0/Wi73c6fYTblUdXQdaqYXHkcZDicWTUGbUASrdgSXg5teB0bA==
+ng-mocks@13.0.3:
+  version "13.0.3"
+  resolved "https://registry.yarnpkg.com/ng-mocks/-/ng-mocks-13.0.3.tgz#ac4789882d2a6fcd779409eac8a316b83154ec33"
+  integrity sha512-5ZLOc54WG93Z9QhYy7pmXSqaq0Avj6zdcYtdlmdQROsFArWKbgxWhxop0JOfA7U3F60pyp0vypf35M5q1AM5tw==
 
 nice-napi@^1.0.2:
   version "1.0.2"
