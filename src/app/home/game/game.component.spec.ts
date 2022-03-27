@@ -33,13 +33,11 @@ describe('GameComponent', () => {
           MatIcon,
           CharComponent,
           MatFormField,
-          MatInput,
           MatCard,
           MatChipList,
-          MatChip,
           ErrorCountDisplayComponent
         ),
-        MockDirectives(RouterLink, CdkTrapFocus),
+        MockDirectives(MatInput, MatChip, RouterLink, CdkTrapFocus),
       ],
       imports: [FormsModule, ReactiveFormsModule, MockModule(MatToolbarModule)],
       providers: [
