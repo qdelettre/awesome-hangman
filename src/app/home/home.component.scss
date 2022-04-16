@@ -1,0 +1,17 @@
+@import "theme";
+@import "variables";
+
+$foreground: map-get($theme, foreground);
+$text-color: if($is-dark-theme, mat-color($foreground, "text"), #fff);
+
+:host {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+h1 {
+  color: $text-color;
+}

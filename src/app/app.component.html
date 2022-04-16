@@ -1,0 +1,10 @@
+<router-outlet></router-outlet>
+<div id="background">
+  <ng-container *ngIf="showCubes$ | async">
+    <div class="cube"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
+    <div class="cube"></div>
+  </ng-container>
+</div>

@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button aria-label="Return to home" routerLink="..">
+    <mat-icon>arrow_back</mat-icon>Return
+  </button>
+</mat-toolbar>
+
+<ng-container *ngIf="wordChars$ | async as wordChars">
+  <div id="container-word-chars">
+    <app-char *ngFor="let char of wordChars" [char]="char"></app-char>
+  </div>
+
+  <mat-card>
+    <div>
+      <mat-chip-list>
+        <mat-chip *ngFor="let charOrWord of guess$ | async">
+          {{ charOrWord }}
+        </mat-chip>
+      </mat-chip-list>
+      <app-error-count-display
+        [count]="errors$ | async"
+        [max]="maxErrors$ | async"
+      ></app-error-count-display>
+    </div>
+  </mat-card>
+
+  <mat-card>
+    <form [formGroup]="formGroup" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="guess"
+          cdkFocusInitial
+          placeholder="Guess a character or a word"
+          aria-label="Guess a character or a word"
+          autocomplete="off"
+          #input
+        />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        aria-label="Guess"
+        matTooltip="Guess"
+        [disabled]="formGroup.invalid"
+        (click)="guess(); input.focus()"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+    </form>
+  </mat-card>
+</ng-container>

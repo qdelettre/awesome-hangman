@@ -1,0 +1,20 @@
+@import "theme";
+@import "variables";
+
+:host {
+  flex-basis: auto;
+  height: 4rem;
+  width: 4rem;
+  text-align: center;
+  line-height: 4rem;
+
+  border: solid 1px $cube-color-primary;
+  background-color: $cube-color-secondary;
+  transform-origin: top left;
+  animation: fadein 2s;
+  font-size: xxx-large;
+
+  &.space {
+    background-color: unset;
+  }
+}

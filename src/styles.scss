@@ -1,0 +1,11 @@
+@import "./scss/theme";
+body {
+  margin: 0;
+}
+
+// Include all theme styles for the components.
+@include angular-material-theme($theme);
+
+body {
+  font-family: "Roboto", serif;
+}
