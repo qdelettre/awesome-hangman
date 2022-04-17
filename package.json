@@ -43,6 +43,7 @@
     "@angular-eslint/template-parser": "13.1.0",
     "@angular/cli": "13.2.3",
     "@angular/compiler-cli": "13.2.2",
+    "@cypress/schematic": "^1.6.0",
     "@cypress/webpack-preprocessor": "5.11.1",
     "@ngrx/schematics": "13.1.0",
     "@types/jasmine": "4.0.2",

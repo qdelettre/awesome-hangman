@@ -107,7 +107,7 @@
           }
         },
         "e2e": {
-          "builder": "@briebug/cypress-schematic:cypress",
+          "builder": "@cypress/schematic:cypress",
           "options": {
             "devServerTarget": "awesome-hangman:serve",
             "watch": true,
@@ -120,7 +120,7 @@
           }
         },
         "cypress-run": {
-          "builder": "@briebug/cypress-schematic:cypress",
+          "builder": "@cypress/schematic:cypress",
           "options": {
             "devServerTarget": "awesome-hangman:serve"
           },
@@ -131,7 +131,7 @@
           }
         },
         "cypress-open": {
-          "builder": "@briebug/cypress-schematic:cypress",
+          "builder": "@cypress/schematic:cypress",
           "options": {
             "devServerTarget": "awesome-hangman:serve",
             "watch": true,
