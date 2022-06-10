@@ -12,5 +12,5 @@ it('should have title', () => {
 it('should have start button', () => {
   const button = 'button[mat-raised-button][color="primary"]';
   cy.get(button).contains('Start').click();
-  cy.url().should('eq', `${Cypress.config().baseUrl}game`);
+  cy.url().should('eq', `${Cypress.config().baseUrl}/game`);
 });
