@@ -34,7 +34,7 @@ it('should guess a char', () => {
 it('should win', () => {
   cy.get('input').type('values');
   cy.get('mat-card:nth-of-type(2) button').click();
-  cy.url().should('eq', `${Cypress.config().baseUrl}game/win`);
+  cy.url().should('eq', `${Cypress.config().baseUrl}/game/win`);
 });
 
 it('should loose', () => {
@@ -65,5 +65,5 @@ it('should loose', () => {
   cy.get('input').type('d');
   cy.get('mat-card:nth-of-type(2) button').click();
 
-  cy.url().should('eq', `${Cypress.config().baseUrl}game/over`);
+  cy.url().should('eq', `${Cypress.config().baseUrl}/game/over`);
 });
