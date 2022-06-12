@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as fromGame from './core/stores/game/game.selectors';
 import * as GameActions from './core/stores/game/game.actions';
@@ -22,17 +22,19 @@ export class GameComponent {
   errors$ = this.store.select(fromGame.getErrors);
 
   formGroup = this.fb.group({
-    guess: [null, Validators.required],
+    guess: ['', Validators.required],
   });
 
-  constructor(private store: Store, private fb: FormBuilder) {}
+  constructor(private store: Store, private fb: NonNullableFormBuilder) {}
 
   guess(): void {
-    this.store.dispatch(
-      GameActions.guess({
-        charOrWord: this.formGroup.value.guess.toLowerCase(),
-      })
-    );
-    this.formGroup.reset();
+    if (this.formGroup.value.guess) {
+      this.store.dispatch(
+        GameActions.guess({
+          charOrWord: this.formGroup.value.guess.toLowerCase(),
+        })
+      );
+      this.formGroup.reset();
+    }
   }
 }
