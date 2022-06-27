@@ -33,7 +33,7 @@ jobs:
         run: yarn run build --configuration production --base-href /awesome-hangman/
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        uses: JamesIves/github-pages-deploy-action@v4.3.4
         with:
           branch: gh-pages
           folder: dist/awesome-hangman
