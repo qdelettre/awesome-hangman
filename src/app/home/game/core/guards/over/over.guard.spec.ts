@@ -1,4 +1,3 @@
-import { TestBed } from '@angular/core/testing';
 import {
   ActivatedRouteSnapshot,
   Route,
@@ -8,6 +7,7 @@ import {
 } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { cold } from 'jasmine-marbles';
+import { ngMocks, MockBuilder, MockRender } from 'ng-mocks';
 import * as fromGame from '../../stores/game/game.selectors';
 
 import { OverGuard } from './over.guard';
@@ -15,11 +15,12 @@ import { OverGuard } from './over.guard';
 describe('OverGuard', () => {
   let guard: OverGuard;
   let store: MockStore;
+  let router: Router;
 
   const route: Route = { path: 'game/over' };
   const urlTree = jasmine.createSpyObj<UrlTree>('Urltree', ['toString']);
-  const router = jasmine.createSpyObj<Router>('router', ['createUrlTree']);
-  router.createUrlTree.and.returnValue(urlTree);
+  const routerMock = jasmine.createSpyObj<Router>('router', ['createUrlTree']);
+  routerMock.createUrlTree.and.returnValue(urlTree);
 
   const activatedRouteSnapshot: ActivatedRouteSnapshot =
     new ActivatedRouteSnapshot();
@@ -28,13 +29,17 @@ describe('OverGuard', () => {
     ['toString']
   );
 
+  beforeEach(() =>
+    MockBuilder(OverGuard)
+      .provide(provideMockStore())
+      .provide({ provide: Router, useValue: routerMock })
+  );
+
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [provideMockStore(), { provide: Router, useValue: router }],
-    });
-    guard = TestBed.inject(OverGuard);
-    store = TestBed.inject(MockStore);
-    router.createUrlTree.calls.reset();
+    guard = MockRender(OverGuard).point.componentInstance;
+    router = ngMocks.findInstance(Router);
+    store = ngMocks.findInstance(MockStore);
+    routerMock.createUrlTree.calls.reset();
   });
 
   it('should be created', () => {

@@ -1,30 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import { MockComponent, MockDirective, ngMocks } from 'ng-mocks';
+import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 import { WinComponent } from './win.component';
+import { WinModule } from './win.module';
 
 describe('WinComponent', () => {
-  let component: WinComponent;
   let fixture: ComponentFixture<WinComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        WinComponent,
-        MockComponent(MatButton),
-        MockDirective(RouterLink),
-      ],
-    }).compileComponents();
+  beforeEach(() => MockBuilder(WinComponent, WinModule));
 
-    fixture = TestBed.createComponent(WinComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    fixture = MockRender(WinComponent);
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
   it('should have title', () => {

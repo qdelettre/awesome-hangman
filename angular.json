@@ -92,6 +92,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            "codeCoverageExclude": ["/**/*module.routing.ts"],
             "stylePreprocessorOptions": {
               "includePaths": ["src/scss"]
             },
@@ -147,6 +148,7 @@
     }
   },
   "cli": {
-    "schematicCollections": ["@ngrx/schematics"]
+    "schematicCollections": ["@ngrx/schematics"],
+    "analytics": false
   }
 }

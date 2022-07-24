@@ -1,4 +1,3 @@
-import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { cold, hot } from 'jasmine-marbles';
@@ -12,26 +11,26 @@ import * as fromGame from './game.selectors';
 import { ROUTER_NAVIGATION } from '@ngrx/router-store';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 describe('GameEffects', () => {
   let actions$: Observable<any>;
   let effects: GameEffects;
   let store: MockStore;
+
   let router: Router;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      providers: [
-        GameEffects,
-        provideMockActions(() => actions$),
-        provideMockStore(),
-      ],
-    });
+  beforeEach(() =>
+    MockBuilder(GameEffects)
+      .provide(provideMockActions(() => actions$))
+      .provide(provideMockStore())
+      .keep(RouterTestingModule)
+  );
 
-    effects = TestBed.inject(GameEffects);
-    store = TestBed.inject(MockStore);
-    router = TestBed.inject(Router);
+  beforeEach(() => {
+    effects = MockRender(GameEffects).point.componentInstance;
+    store = ngMocks.findInstance(MockStore);
+    router = ngMocks.findInstance(Router);
   });
 
   it('should be created', () => {

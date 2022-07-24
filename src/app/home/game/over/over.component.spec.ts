@@ -1,30 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import { MockComponent, MockDirective, ngMocks } from 'ng-mocks';
+import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 import { OverComponent } from './over.component';
+import { OverModule } from './over.module';
 
 describe('OverComponent', () => {
-  let component: OverComponent;
   let fixture: ComponentFixture<OverComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        OverComponent,
-        MockComponent(MatButton),
-        MockDirective(RouterLink),
-      ],
-    }).compileComponents();
+  beforeEach(() => MockBuilder(OverComponent, OverModule));
 
-    fixture = TestBed.createComponent(OverComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(() => {
+    fixture = MockRender(OverComponent);
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
   it('should have title', () => {

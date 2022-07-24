@@ -1,27 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentFixture } from '@angular/core/testing';
 import { RouterReducerState } from '@ngrx/router-store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 import { AppComponent } from './app.component';
+import { AppModule } from './app.module';
 import { selectUrl } from './shared/stores/router/router.selectors';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let store: MockStore<RouterReducerState>;
 
-  const initTestBed = () => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [AppComponent],
-      providers: [provideMockStore()],
-    }).compileComponents();
+  beforeEach(() =>
+    MockBuilder(AppComponent, AppModule).provide(provideMockStore())
+  );
 
-    fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    store = TestBed.inject(MockStore);
-  };
+  beforeEach(() => {
+    fixture = MockRender(AppComponent);
+    store = ngMocks.findInstance(MockStore);
+  });
 
-  beforeEach(initTestBed);
+  afterEach(() => {
+    store?.resetSelectors();
+  });
 
   it('should create the app', () => {
     expect(fixture.componentInstance).toBeTruthy();

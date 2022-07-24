@@ -1,31 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButton } from '@angular/material/button';
+import { ComponentFixture } from '@angular/core/testing';
 import { RouterLink } from '@angular/router';
-import { MockComponent, MockDirective, ngMocks } from 'ng-mocks';
+import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 import { HomeComponent } from './home.component';
+import { HomeModule } from './home.module';
 
 describe('HomeComponent', () => {
-  let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
-  const initTestBed = () => {
-    TestBed.configureTestingModule({
-      declarations: [
-        HomeComponent,
-        MockComponent(MatButton),
-        MockDirective(RouterLink),
-      ],
-    }).compileComponents();
+  beforeEach(() => MockBuilder(HomeComponent, HomeModule));
 
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  };
-
-  beforeEach(initTestBed);
+  beforeEach(() => {
+    fixture = MockRender(HomeComponent);
+  });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture).toBeTruthy();
   });
 
   it('should have title', () => {
