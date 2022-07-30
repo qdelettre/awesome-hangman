@@ -92,7 +92,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "codeCoverageExclude": ["/**/*module.routing.ts"],
+            "codeCoverageExclude": ["**/*routing.module.ts"],
             "stylePreprocessorOptions": {
               "includePaths": ["src/scss"]
             },
