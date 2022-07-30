@@ -1,4 +1,3 @@
-import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 import { WordsService } from '../../services/words/words.service';
@@ -6,6 +5,7 @@ import { cold, hot } from 'jasmine-marbles';
 import { WordEffects } from './word.effects';
 import * as WordActions from './word.actions';
 import { WordApiResponseMocks } from 'src/tests/mocks/word-api-response';
+import { MockBuilder, MockRender } from 'ng-mocks';
 
 describe('WordEffects', () => {
   let actions$: Observable<any>;
@@ -16,19 +16,17 @@ describe('WordEffects', () => {
     'get',
   ]);
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        WordEffects,
-        provideMockActions(() => actions$),
-        {
-          provide: WordsService,
-          useValue: wordsService,
-        },
-      ],
-    });
+  beforeEach(() =>
+    MockBuilder(WordEffects)
+      .provide(provideMockActions(() => actions$))
+      .provide({
+        provide: WordsService,
+        useValue: wordsService,
+      })
+  );
 
-    effects = TestBed.inject(WordEffects);
+  beforeEach(() => {
+    effects = MockRender(WordEffects).point.componentInstance;
   });
 
   it('should be created', () => {

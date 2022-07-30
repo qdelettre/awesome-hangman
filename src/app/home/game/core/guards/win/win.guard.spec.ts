@@ -1,4 +1,3 @@
-import { TestBed } from '@angular/core/testing';
 import {
   ActivatedRouteSnapshot,
   Route,
@@ -8,6 +7,7 @@ import {
 } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { cold } from 'jasmine-marbles';
+import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 import * as fromGame from '../../stores/game/game.selectors';
 
 import { WinGuard } from './win.guard';
@@ -15,11 +15,12 @@ import { WinGuard } from './win.guard';
 describe('WinGuard', () => {
   let guard: WinGuard;
   let store: MockStore;
+  let router: Router;
 
   const route: Route = { path: 'game/win' };
   const urlTree = jasmine.createSpyObj<UrlTree>('Urltree', ['toString']);
-  const router = jasmine.createSpyObj<Router>('router', ['createUrlTree']);
-  router.createUrlTree.and.returnValue(urlTree);
+  const routerMock = jasmine.createSpyObj<Router>('router', ['createUrlTree']);
+  routerMock.createUrlTree.and.returnValue(urlTree);
 
   const activatedRouteSnapshot: ActivatedRouteSnapshot =
     new ActivatedRouteSnapshot();
@@ -28,13 +29,17 @@ describe('WinGuard', () => {
     ['toString']
   );
 
+  beforeEach(() =>
+    MockBuilder(WinGuard)
+      .provide(provideMockStore())
+      .provide({ provide: Router, useValue: routerMock })
+  );
+
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [provideMockStore(), { provide: Router, useValue: router }],
-    });
-    guard = TestBed.inject(WinGuard);
-    store = TestBed.inject(MockStore);
-    router.createUrlTree.calls.reset();
+    guard = MockRender(WinGuard).point.componentInstance;
+    router = ngMocks.findInstance(Router);
+    store = ngMocks.findInstance(MockStore);
+    routerMock.createUrlTree.calls.reset();
   });
 
   it('should be created', () => {

@@ -1,31 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockRender } from 'ng-mocks';
+import { ComponentFixture } from '@angular/core/testing';
+import { MockBuilder, MockRender } from 'ng-mocks';
 
 import { ErrorCountDisplayComponent } from './error-count-display.component';
 
 describe('ErrorCountDisplayComponent', () => {
-  let component: ErrorCountDisplayComponent;
   let fixture: ComponentFixture<ErrorCountDisplayComponent>;
 
-  beforeEach(() =>
-    TestBed.configureTestingModule({
-      declarations: [ErrorCountDisplayComponent],
-    }).compileComponents()
-  );
+  beforeEach(() => MockBuilder(ErrorCountDisplayComponent));
 
   beforeEach(() => {
     fixture = MockRender(ErrorCountDisplayComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture).toBeTruthy();
   });
 
   it('should have a span with count and max', () => {
-    component.count = 1;
-    component.max = 2;
+    fixture.componentInstance.count = 1;
+    fixture.componentInstance.max = 2;
     fixture.detectChanges();
 
     expect(

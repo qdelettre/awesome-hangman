@@ -1,64 +1,42 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 import { MatButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
-import { MockComponents, MockDirectives, MockModule, ngMocks } from 'ng-mocks';
+import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { GameComponent } from './game.component';
 import * as fromGame from './core/stores/game/game.reducer';
 import { CharComponent } from './core/components/char/char.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
-import { MatFormField } from '@angular/material/form-field';
-import { CdkTrapFocus } from '@angular/cdk/a11y';
 import * as GameActions from './core/stores/game/game.actions';
-import { MatChip, MatChipList } from '@angular/material/chips';
-import { MatCard } from '@angular/material/card';
-import { ErrorCountDisplayComponent } from './core/components/error-count-display/error-count-display.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GameModule } from './game.module';
 
 describe('GameComponent', () => {
-  let component: GameComponent;
   let fixture: ComponentFixture<GameComponent>;
   let store: MockStore;
   const word = 'word';
 
-  const initTestBed = () => {
-    TestBed.configureTestingModule({
-      declarations: [
-        GameComponent,
-        MockComponents(
-          MatButton,
-          MatIcon,
-          CharComponent,
-          MatFormField,
-          MatCard,
-          MatChipList,
-          ErrorCountDisplayComponent
-        ),
-        MockDirectives(MatInput, MatChip, RouterLink, CdkTrapFocus),
-      ],
-      imports: [FormsModule, ReactiveFormsModule, MockModule(MatToolbarModule)],
-      providers: [
+  beforeEach(() =>
+    MockBuilder(GameComponent, GameModule)
+      .provide(
         provideMockStore({
           initialState: {
             [fromGame.gameFeatureKey]: fromGame.initialState,
           },
-        }),
-      ],
-    }).compileComponents();
+        })
+      )
+      .keep(FormsModule)
+      .keep(ReactiveFormsModule)
+  );
 
-    fixture = TestBed.createComponent(GameComponent);
-    component = fixture.componentInstance;
-    store = TestBed.inject(MockStore);
-    fixture.detectChanges();
-  };
-
-  beforeEach(initTestBed);
+  beforeEach(() => {
+    fixture = MockRender(GameComponent);
+    store = ngMocks.findInstance(MockStore);
+  });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
   it('should have toolbar', () => {

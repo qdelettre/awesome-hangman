@@ -1,4 +1,3 @@
-import { TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -7,18 +6,20 @@ import { url, WordsService } from './words.service';
 import { first } from 'rxjs/operators';
 import { WordApiResponseMocks } from 'src/tests/mocks/word-api-response';
 import { WordApiResponse } from '../../models/word-api-response';
+import { HttpClientModule } from '@angular/common/http';
+import { MockBuilder, ngMocks } from 'ng-mocks';
 
 describe('WordsService', () => {
   let service: WordsService;
   let httpMock: HttpTestingController;
 
+  beforeEach(() =>
+    MockBuilder(WordsService).replace(HttpClientModule, HttpClientTestingModule)
+  );
+
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [WordsService],
-    });
-    service = TestBed.inject(WordsService);
-    httpMock = TestBed.inject(HttpTestingController);
+    service = ngMocks.findInstance(WordsService);
+    httpMock = ngMocks.findInstance(HttpTestingController);
   });
 
   afterEach(() => {
@@ -33,10 +34,13 @@ describe('WordsService', () => {
     service
       .get()
       .pipe(first())
-      .subscribe((data: WordApiResponse) => {
-        expect(data).toEqual(WordApiResponseMocks.default);
-        done();
-      }, done.fail);
+      .subscribe({
+        next: (data: WordApiResponse) => {
+          expect(data).toEqual(WordApiResponseMocks.default);
+          done();
+        },
+        error: done.fail,
+      });
 
     const req = httpMock.expectOne((r) => r.url === url);
 
