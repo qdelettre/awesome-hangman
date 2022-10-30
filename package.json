@@ -46,7 +46,7 @@
     "@cypress/schematic": "2.2.0",
     "@ngrx/schematics": "14.3.2",
     "@types/jasmine": "4.3.0",
-    "@types/node": "16.11.47",
+    "@types/node": "16.18.3",
     "@typescript-eslint/eslint-plugin": "5.32.0",
     "@typescript-eslint/parser": "5.32.0",
     "cypress": "10.11.0",
