@@ -12,8 +12,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
-          check-latest: true
+          node-version-file: ".nvmrc"
 
       - uses: actions/cache@v3
         id: yarn-and-build-cache

@@ -50,7 +50,7 @@ describe('GameComponent', () => {
       fixture.nativeElement
         .querySelector('mat-toolbar button')
         .textContent.trim()
-    ).toEqual('arrow_backReturn');
+    ).toEqual('arrow_back');
 
     expect(
       fixture.nativeElement.querySelector('mat-toolbar button mat-icon')
@@ -123,7 +123,7 @@ describe('GameComponent', () => {
       ngMocks.change(input, char);
       fixture.detectChanges();
 
-      expect(ngMocks.findInstances(MatButton)[1].disabled).toEqual(false);
+      expect(ngMocks.findInstance(MatButton).disabled).toEqual(false);
 
       const button = ngMocks.find('form button');
       ngMocks.click(button);
@@ -136,7 +136,7 @@ describe('GameComponent', () => {
       );
 
       expect(fixture.nativeElement.querySelector('input').value).toEqual('');
-      expect(ngMocks.findInstances(MatButton)[1].disabled).toEqual(true);
+      expect(ngMocks.findInstance(MatButton).disabled).toEqual(true);
     });
   });
 });

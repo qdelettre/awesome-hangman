@@ -2,7 +2,11 @@
 @import "variables";
 
 $foreground: map-get($theme, foreground);
-$text-color: if($is-dark-theme, mat-color($foreground, "text"), #fff);
+$text-color: if(
+  $is-dark-theme,
+  mat.get-color-from-palette($foreground, "text"),
+  #fff
+);
 
 :host {
   position: fixed;
