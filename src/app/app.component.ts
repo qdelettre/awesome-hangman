@@ -11,9 +11,7 @@ import * as fromRouter from './shared/stores/router/router.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  title = 'awesome-hangman';
-
-  showCubes$ = this.store.select(fromRouter.selectUrl).pipe(
+  readonly showCubes$ = this.store.select(fromRouter.selectUrl).pipe(
     map((url) => url === '/'),
     distinctUntilChanged()
   );

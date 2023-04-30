@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <button mat-icon-button aria-label="Return to home" routerLink="..">
-    <mat-icon>arrow_back</mat-icon>Return
+    <mat-icon>arrow_back</mat-icon>
   </button>
 </mat-toolbar>
 
@@ -9,13 +9,13 @@
     <app-char *ngFor="let char of wordChars" [char]="char"></app-char>
   </div>
 
-  <mat-card>
+  <mat-card appearance="outlined">
     <div>
-      <mat-chip-list>
-        <mat-chip *ngFor="let charOrWord of guess$ | async">
+      <mat-chip-listbox>
+        <mat-chip-option *ngFor="let charOrWord of guess$ | async">
           {{ charOrWord }}
-        </mat-chip>
-      </mat-chip-list>
+        </mat-chip-option>
+      </mat-chip-listbox>
       <app-error-count-display
         [count]="errors$ | async"
         [max]="maxErrors$ | async"
@@ -23,7 +23,7 @@
     </div>
   </mat-card>
 
-  <mat-card>
+  <mat-card appearance="outlined">
     <form [formGroup]="formGroup" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
       <mat-form-field>
         <input

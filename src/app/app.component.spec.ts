@@ -27,10 +27,6 @@ describe('AppComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it(`should have as title 'awesome-hangman'`, () => {
-    expect(fixture.componentInstance.title).toEqual('awesome-hangman');
-  });
-
   it('should render title', () => {
     expect(fixture.nativeElement.querySelector('*').textContent).toEqual('');
   });

@@ -1,3 +1,5 @@
+@use "@angular/material" as mat;
+
 @import "theme";
 @import "variables";
 
@@ -9,9 +11,9 @@ $background: map-get($theme, "background");
   z-index: -1;
   background: linear-gradient(
     132deg,
-    mat-color($accent),
-    mat-color($primary),
-    mat-color($primary, A100)
+    mat.get-color-from-palette($accent, 500),
+    mat.get-color-from-palette($primary, 500),
+    mat.get-color-from-palette($primary, A100)
   );
   background-size: 400% 400%;
   animation: Gradient 15s ease infinite;

@@ -19,7 +19,7 @@ describe('HomeComponent', () => {
 
   it('should have title', () => {
     expect(
-      fixture.nativeElement.querySelector('h1.mat-display-1').textContent
+      fixture.nativeElement.querySelector('h1.mat-headline-4').textContent
     ).toEqual('Awesome Hangman');
   });
 
