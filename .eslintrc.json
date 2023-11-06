@@ -5,14 +5,26 @@
     "plugin:jasmine/recommended",
     "plugin:regexp/recommended"
   ],
-  "ignorePatterns": ["projects/**/*"],
-  "plugins": ["jasmine", "regexp"],
-  "env": { "jasmine": true },
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "plugins": [
+    "jasmine",
+    "regexp"
+  ],
+  "env": {
+    "jasmine": true
+  },
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
-        "project": ["tsconfig.json", "e2e/tsconfig.json"],
+        "project": [
+          "tsconfig.json",
+          "e2e/tsconfig.json"
+        ],
         "createDefaultProgram": true
       },
       "extends": [
@@ -43,12 +55,22 @@
         "no-shadow": 0,
         "@typescript-eslint/no-shadow": 2,
         "@typescript-eslint/member-ordering": 1,
-        "no-unused-vars": [2, { "args": "all", "argsIgnorePattern": "^_" }]
+        "no-unused-vars": [
+          2,
+          {
+            "args": "all",
+            "argsIgnorePattern": "^_"
+          }
+        ]
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
       "rules": {}
     }
   ]
