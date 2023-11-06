@@ -6,6 +6,6 @@ import { WinComponent } from './win.component';
 import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-    imports: [CommonModule, WinRoutingModule, MatButtonModule, WinComponent],
+  imports: [CommonModule, WinRoutingModule, MatButtonModule, WinComponent],
 })
 export class WinModule {}

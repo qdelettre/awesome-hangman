@@ -22,7 +22,7 @@ export const getGuessSorted = createSelector(getGuess, (guess) =>
   )
 );
 
-const r = /[^a-zA-Z]/;
+const r = /[^a-z]/i;
 export const getWordChars = createSelector(
   getWord,
   getGuessSorted,
@@ -64,7 +64,7 @@ export const getWin = createSelector(
   (word, { words, chars }) =>
     !!word &&
     (words.some((w) => w.toLowerCase() === word.toLowerCase()) ||
-      word.split(/[^a-zA-Z]?/).every((w) => chars.includes(w.toLowerCase())))
+      word.split(/[^a-z]?/i).every((w) => chars.includes(w.toLowerCase())))
 );
 
 export const getLoose = createSelector(

@@ -1,18 +1,19 @@
 import { ComponentFixture } from '@angular/core/testing';
-import { MatButton } from '@angular/material/button';
 import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
-import { Mock, MockBuilder, MockRender, NG_MOCKS_ROOT_PROVIDERS, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockRender,
+  NG_MOCKS_ROOT_PROVIDERS,
+  ngMocks,
+} from 'ng-mocks';
 
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { GameComponent } from './game.component';
 import * as fromGame from './core/stores/game/game.selectors';
 
-import { CharComponent } from './core/components/char/char.component';
-import * as GameActions from './core/stores/game/game.actions';
-import { FormControlName, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { initialState } from './core/stores/game/game.reducer';
-import { CdkTrapFocus } from '@angular/cdk/a11y';
 
 describe('GameComponent', () => {
   let fixture: ComponentFixture<GameComponent>;
@@ -23,12 +24,15 @@ describe('GameComponent', () => {
     MockBuilder(GameComponent)
       .provide(
         provideMockStore({
-          selectors:[
-            {selector: fromGame.getWordChars, value: [] },
-            {selector: fromGame.getGuess, value:[] },
-            {selector: fromGame.getMaxErrors, value:initialState.rules.maxErrors },
-            {selector: fromGame.getErrors, value:0 },
-          ]
+          selectors: [
+            { selector: fromGame.getWordChars, value: [] },
+            { selector: fromGame.getGuess, value: [] },
+            {
+              selector: fromGame.getMaxErrors,
+              value: initialState.rules.maxErrors,
+            },
+            { selector: fromGame.getErrors, value: 0 },
+          ],
         })
       )
       .keep(ReactiveFormsModule)

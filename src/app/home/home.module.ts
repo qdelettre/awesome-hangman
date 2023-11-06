@@ -6,6 +6,6 @@ import { HomeComponent } from './home.component';
 import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-    imports: [CommonModule, HomeRoutingModule, MatButtonModule, HomeComponent],
+  imports: [CommonModule, HomeRoutingModule, MatButtonModule, HomeComponent],
 })
 export class HomeModule {}

@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as fromGame from './core/stores/game/game.selectors';
 import * as GameActions from './core/stores/game/game.actions';
@@ -18,30 +24,30 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-    selector: 'app-game',
-    templateUrl: './game.component.html',
-    styleUrls: ['./game.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        MatToolbarModule,
-        MatButtonModule,
-        RouterLink,
-        MatIconModule,
-        NgIf,
-        NgFor,
-        CharComponent,
-        MatCardModule,
-        MatChipsModule,
-        ErrorCountDisplayComponent,
-        FormsModule,
-        A11yModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatTooltipModule,
-        AsyncPipe,
-    ],
+  selector: 'app-game',
+  templateUrl: './game.component.html',
+  styleUrls: ['./game.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    RouterLink,
+    MatIconModule,
+    NgIf,
+    NgFor,
+    CharComponent,
+    MatCardModule,
+    MatChipsModule,
+    ErrorCountDisplayComponent,
+    FormsModule,
+    A11yModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTooltipModule,
+    AsyncPipe,
+  ],
 })
 export class GameComponent {
   @ViewChild('input')
