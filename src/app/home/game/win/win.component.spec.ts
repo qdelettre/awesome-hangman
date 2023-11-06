@@ -4,12 +4,11 @@ import { RouterLink } from '@angular/router';
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 
 import { WinComponent } from './win.component';
-import { WinModule } from './win.module';
 
 describe('WinComponent', () => {
   let fixture: ComponentFixture<WinComponent>;
 
-  beforeEach(() => MockBuilder(WinComponent, WinModule));
+  beforeEach(() => MockBuilder(WinComponent));
 
   beforeEach(() => {
     fixture = MockRender(WinComponent);

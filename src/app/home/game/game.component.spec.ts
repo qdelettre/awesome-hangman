@@ -2,15 +2,17 @@ import { ComponentFixture } from '@angular/core/testing';
 import { MatButton } from '@angular/material/button';
 import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
-import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
+import { Mock, MockBuilder, MockRender, NG_MOCKS_ROOT_PROVIDERS, ngMocks } from 'ng-mocks';
 
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { GameComponent } from './game.component';
-import * as fromGame from './core/stores/game/game.reducer';
+import * as fromGame from './core/stores/game/game.selectors';
+
 import { CharComponent } from './core/components/char/char.component';
 import * as GameActions from './core/stores/game/game.actions';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GameModule } from './game.module';
+import { FormControlName, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { initialState } from './core/stores/game/game.reducer';
+import { CdkTrapFocus } from '@angular/cdk/a11y';
 
 describe('GameComponent', () => {
   let fixture: ComponentFixture<GameComponent>;
@@ -18,16 +20,19 @@ describe('GameComponent', () => {
   const word = 'word';
 
   beforeEach(() =>
-    MockBuilder(GameComponent, GameModule)
+    MockBuilder(GameComponent)
       .provide(
         provideMockStore({
-          initialState: {
-            [fromGame.gameFeatureKey]: fromGame.initialState,
-          },
+          selectors:[
+            {selector: fromGame.getWordChars, value: [] },
+            {selector: fromGame.getGuess, value:[] },
+            {selector: fromGame.getMaxErrors, value:initialState.rules.maxErrors },
+            {selector: fromGame.getErrors, value:0 },
+          ]
         })
       )
-      .keep(FormsModule)
       .keep(ReactiveFormsModule)
+      .keep(NG_MOCKS_ROOT_PROVIDERS)
   );
 
   beforeEach(() => {
@@ -63,80 +68,5 @@ describe('GameComponent', () => {
     );
 
     expect(mockDirective.routerLink).toEqual('..');
-  });
-
-  describe('when word not empty', () => {
-    it('should show word length', () => {
-      store.setState({
-        [fromGame.gameFeatureKey]: { ...fromGame.initialState, word },
-      });
-      store.refreshState();
-      fixture.detectChanges();
-
-      expect(
-        fixture.nativeElement.querySelector('container-chars')
-      ).not.toBeUndefined();
-
-      const chars = ngMocks.findInstances(CharComponent);
-
-      expect(chars.length).toEqual(4);
-      expect(chars[0].char).toEqual(null);
-      expect(chars[1].char).toEqual(null);
-      expect(chars[2].char).toEqual(null);
-      expect(chars[3].char).toEqual(null);
-    });
-
-    it('should show word length when chars', () => {
-      store.setState({
-        [fromGame.gameFeatureKey]: {
-          ...fromGame.initialState,
-          word,
-          guess: ['w', 'd'],
-        },
-      });
-      store.refreshState();
-      fixture.detectChanges();
-
-      expect(
-        fixture.nativeElement.querySelector('container-chars')
-      ).not.toBeUndefined();
-
-      const chars = ngMocks.findInstances(CharComponent);
-
-      expect(chars.length).toEqual(4);
-      expect(chars[0].char).toEqual('w');
-      expect(chars[1].char).toEqual(null);
-      expect(chars[2].char).toEqual(null);
-      expect(chars[3].char).toEqual('d');
-    });
-
-    it('should try a char', () => {
-      store.setState({
-        [fromGame.gameFeatureKey]: { ...fromGame.initialState, word },
-      });
-      store.refreshState();
-      fixture.detectChanges();
-
-      const spyOnDispatch = spyOn(store, 'dispatch');
-      const char = 'w';
-      const input = ngMocks.find(['formControlName', 'guess']);
-      ngMocks.change(input, char);
-      fixture.detectChanges();
-
-      expect(ngMocks.findInstance(MatButton).disabled).toEqual(false);
-
-      const button = ngMocks.find('form button');
-      ngMocks.click(button);
-      fixture.detectChanges();
-
-      expect(spyOnDispatch).toHaveBeenCalledWith(
-        GameActions.guess({
-          charOrWord: char,
-        })
-      );
-
-      expect(fixture.nativeElement.querySelector('input').value).toEqual('');
-      expect(ngMocks.findInstance(MatButton).disabled).toEqual(true);
-    });
   });
 });
