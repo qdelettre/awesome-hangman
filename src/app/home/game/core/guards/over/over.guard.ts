@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import {
-  CanActivate,
-  CanLoad,
   Route,
   UrlSegment,
   ActivatedRouteSnapshot,
@@ -17,7 +15,7 @@ import * as fromGame from '../../stores/game/game.selectors';
 @Injectable({
   providedIn: 'root',
 })
-export class OverGuard implements CanActivate, CanLoad {
+export class OverGuard {
   gameOver$ = this.store
     .select(fromGame.getLoose)
     .pipe(

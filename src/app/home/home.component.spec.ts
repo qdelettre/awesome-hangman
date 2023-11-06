@@ -2,12 +2,11 @@ import { ComponentFixture } from '@angular/core/testing';
 import { RouterLink } from '@angular/router';
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
 import { HomeComponent } from './home.component';
-import { HomeModule } from './home.module';
 
 describe('HomeComponent', () => {
   let fixture: ComponentFixture<HomeComponent>;
 
-  beforeEach(() => MockBuilder(HomeComponent, HomeModule));
+  beforeEach(() => MockBuilder(HomeComponent));
 
   beforeEach(() => {
     fixture = MockRender(HomeComponent);

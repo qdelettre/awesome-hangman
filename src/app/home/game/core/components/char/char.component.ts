@@ -10,6 +10,7 @@ import {
   templateUrl: './char.component.html',
   styleUrls: ['./char.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class CharComponent {
   @Input() char: string | null = null;

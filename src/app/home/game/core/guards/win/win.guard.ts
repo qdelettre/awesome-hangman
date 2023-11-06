@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import {
-  CanActivate,
-  CanLoad,
   Route,
   UrlSegment,
   ActivatedRouteSnapshot,
@@ -17,7 +15,7 @@ import * as fromGame from '../../stores/game/game.selectors';
 @Injectable({
   providedIn: 'root',
 })
-export class WinGuard implements CanActivate, CanLoad {
+export class WinGuard {
   win$ = this.store
     .select(fromGame.getWin)
     .pipe(map((win) => (win ? true : this.router.createUrlTree(['/']))));

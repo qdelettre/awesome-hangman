@@ -6,7 +6,6 @@ import { OverComponent } from './over.component';
 import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [OverComponent],
-  imports: [CommonModule, OverRoutingModule, MatButtonModule],
+  imports: [CommonModule, OverRoutingModule, MatButtonModule, OverComponent],
 })
 export class OverModule {}

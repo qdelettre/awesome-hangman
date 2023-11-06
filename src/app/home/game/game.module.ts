@@ -24,7 +24,6 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { ErrorCountDisplayComponent } from './core/components/error-count-display/error-count-display.component';
 
 @NgModule({
-  declarations: [GameComponent, CharComponent, ErrorCountDisplayComponent],
   imports: [
     A11yModule,
     CommonModule,
@@ -43,6 +42,9 @@ import { ErrorCountDisplayComponent } from './core/components/error-count-displa
     StoreModule.forFeature(fromGame.gameFeatureKey, fromGame.reducer),
     StoreModule.forFeature(fromWord.wordFeatureKey, fromWord.reducer),
     EffectsModule.forFeature([WordEffects, GameEffects]),
+    GameComponent,
+    CharComponent,
+    ErrorCountDisplayComponent,
   ],
 })
 export class GameModule {}
